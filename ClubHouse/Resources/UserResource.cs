@@ -12,8 +12,12 @@ namespace ClubHouse.Resources
 
     }
 
-    public interface IUserResource : IListable<User>, IGettable<User, string>
+    public interface IUserResource : IUserResource<User, string>
     {
 
+    }
+
+    public interface IUserResource<TModel, TKey> : IListable<TModel>, IGettable<TModel, TKey>
+    {
     }
 }
