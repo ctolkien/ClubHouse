@@ -8,7 +8,6 @@ namespace ClubHouse.Test
 {
     public class EpicTests
     {
-
         [Fact]
         public async Task GetEpic()
         {
@@ -27,8 +26,8 @@ namespace ClubHouse.Test
 
             var e = new Epic
             {
-                Id = 10,
-                Name = "new epic name",
+                Id = 22,
+                Name = "new epic name #2",
                 State = EpicState.InProgress
             };
 

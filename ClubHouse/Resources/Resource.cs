@@ -12,9 +12,9 @@ namespace ClubHouse.Resources
         protected readonly ClubHouseHttpClient _client;
         protected abstract string ResourceName { get; }
 
-        protected Func<JsonSerializerSettings> DefaultUpdateSettings = () => new UpdateSerializerSettings();
-        protected Func<JsonSerializerSettings> DefaultCreateSettings = () => new CreateSerializerSettings();
-        protected Func<JsonSerializerSettings> DefaultSettings = () => new DefaultSerializerSettings();
+        protected static Func<JsonSerializerSettings> DefaultUpdateSettings = () => new UpdateSerializerSettings();
+        protected static Func<JsonSerializerSettings> DefaultCreateSettings = () => new CreateSerializerSettings();
+        protected static Func<JsonSerializerSettings> DefaultSettings = () => new DefaultSerializerSettings();
 
         internal Resource(ClubHouseHttpClient client)
         {
@@ -50,11 +50,6 @@ namespace ClubHouse.Resources
 
             return JsonConvert.DeserializeObject<TModel>(content, DefaultSettings());
         }
-
-        //public virtual async Task<T> Update(T model)
-        //{
-        //    return await Update<T>(model);
-        //}
 
         public virtual async Task<TModel> Update<TInput>(TInput model) where TInput: ClubHouseModel<TKey>
         {

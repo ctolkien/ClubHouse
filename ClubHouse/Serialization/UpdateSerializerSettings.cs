@@ -14,6 +14,7 @@ namespace ClubHouse.Serialization
                 NamingStrategy = new SnakeCaseNamingStrategy()
             };
             NullValueHandling = NullValueHandling.Ignore;
+
             Converters.Add(new EnumConverter());
         }
     }

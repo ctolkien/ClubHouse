@@ -8,8 +8,6 @@ namespace ClubHouse.Resources
         internal StoryLinkResource(ClubHouseHttpClient client) : base(client)
         {
         }
-
-
     }
 
     public interface IStoryLinkResource : IStoryLinkResource<StoryLink, int>
@@ -20,6 +18,5 @@ namespace ClubHouse.Resources
         IGettable<TModel, TKey>,
         IDeletable<TKey> where TModel : ClubHouseModel<TKey>
     {
-
     }
 }

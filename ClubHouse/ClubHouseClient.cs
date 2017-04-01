@@ -21,10 +21,15 @@ namespace ClubHouse
                 BaseAddress = new Uri(EndPoint)
             };
 
-            Projects = new ProjectResource(HttpClient);
             Epics = new EpicResource(HttpClient);
-            Users = new UserResource(HttpClient);
+            Files = new FileResource(HttpClient);
             Labels = new LabelResource(HttpClient);
+            LinkedFiles = new LinkedFileResource(HttpClient);
+            Projects = new ProjectResource(HttpClient);
+            StoryLinks = new StoryLinkResource(HttpClient);
+            Stories = new StoryResource(HttpClient);
+            Users = new UserResource(HttpClient);
+            Workflows = new WorkflowResource(HttpClient);
 
         }
 
@@ -32,6 +37,11 @@ namespace ClubHouse
         public IEpicResource Epics { get; }
         public IUserResource Users { get; }
         public ILabelResource Labels { get; }
+        public IStoryLinkResource StoryLinks { get; }
+        public IFileResource Files { get; }
+        public ILinkedFileResource LinkedFiles { get;}
+        public IWorkflowResource Workflows { get; }
+        public IStoryResource Stories { get; }
 
         public void Dispose()
         {

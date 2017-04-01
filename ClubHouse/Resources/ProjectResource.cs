@@ -1,4 +1,8 @@
-﻿using ClubHouse.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using ClubHouse.Models;
+using Newtonsoft.Json;
 
 namespace ClubHouse.Resources
 {
@@ -10,11 +14,20 @@ namespace ClubHouse.Resources
         {
         }
 
-        //TODO: List Stories
+
+        public virtual async Task<IList<Story>> ListStories(int id)
+        {
+            var result = await _client.GetAsync($"{ResourceUrl(id)}/stories");
+            var content = await result.Content.ReadAsStringAsync();
+
+            return JsonConvert.DeserializeObject<IList<Story>>(content, DefaultSettings());
+        }
+
     }
 
     public interface IProjectResource : IProjectResource<Project, int>
     {
+        Task<IList<Story>> ListStories(int id);
     }
 
     public interface IProjectResource<TModel, TKey> :
