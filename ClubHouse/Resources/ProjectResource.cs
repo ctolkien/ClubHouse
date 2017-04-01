@@ -18,11 +18,11 @@ namespace ClubHouse.Resources
     }
 
     public interface IProjectResource<TModel, TKey> :
-        IListable<TModel>,
+        IListable<TModel, TKey>,
         IGettable<TModel, TKey>,
-        IUpdateable<TModel>,
-        ICreateable<TModel>,
-        IDeletable<TKey>
+        IUpdateable<TModel, TModel, TKey>,
+        ICreateable<TModel, TModel, TKey>,
+        IDeletable<TKey> where TModel : ClubHouseModel<TKey>
     {
     }
 }

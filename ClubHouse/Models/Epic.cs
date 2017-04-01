@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using ClubHouse.Serialization;
 using System;
 using System.Collections.Generic;
 
@@ -8,19 +8,20 @@ namespace ClubHouse.Models
     {
         public IList<string> FollowerIds { get; set; }
         public IList<string> OwnerIds { get; set; }
-        public DateTime Deadline { get; set; }
-        [HideFromUpdate]
+        public DateTime? Deadline { get; set; }
+        [HideFromUpdate, HideFromCreate]
         public int Position { get; set; }
         public string Name { get; set; }
 
         [HideFromUpdate]
         public IList<Comment> Comments { get; set; }
+        [HideFromCreate]
         public bool Archived { get; set; }
         public string Description { get; set; }
         public EpicState State { get; set; }
-        [HideFromUpdate]
+        [HideFromUpdate, HideFromCreate]
         public DateTime CreatedAt { get; set; }
-        [HideFromUpdate]
+        [HideFromUpdate, HideFromCreate]
         public DateTime UpdatedAt { get; set; }
     }
 
@@ -32,7 +33,6 @@ namespace ClubHouse.Models
 
     public enum EpicState
     {
-        [JsonProperty("to do")]
         ToDo,
         InProgress,
         Done

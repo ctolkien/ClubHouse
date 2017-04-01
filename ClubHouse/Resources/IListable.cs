@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using ClubHouse.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ClubHouse.Resources
 {
-    public interface IListable<T>
+    public interface IListable<TModel, TKey>
     {
-        Task<IList<T>> List();
+        Task<IList<TModel>> List();
     }
 }

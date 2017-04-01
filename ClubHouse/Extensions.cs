@@ -22,6 +22,7 @@ namespace ClubHouse
 
         internal static string SeparateCamelCase(this string value)
         {
+            //todo: there is a bug here which inputs a space character at the beginning
             return Regex.Replace(value, "((?<=[a-z])[A-Z]|[A-Z](?=[a-z]))", " $1");
         }
     }

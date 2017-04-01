@@ -4,7 +4,6 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
-[assembly: InternalsVisibleTo("ClubHouse.Test")]
 namespace ClubHouse
 {
     internal class ClubHouseHttpMessageHandler : DelegatingHandler
@@ -29,10 +28,10 @@ namespace ClubHouse
             if (request.Content != null)
             {
                 request.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-
             }
 
             return base.SendAsync(request, cancellationToken);
         }
+
     }
 }

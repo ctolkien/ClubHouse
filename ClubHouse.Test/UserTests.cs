@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Xunit;
+using static ClubHouse.Test.TestHelpers;
+
 
 namespace ClubHouse.Test
 {
-    public class UserTests : TestBase
+    public class UserTests
     {
         [Fact]
         public async Task ListUsers()
@@ -23,9 +22,9 @@ namespace ClubHouse.Test
         {
             var client = CreateClient();
 
-            var users = await client.Users.Get("asd");
+            var users = await client.Users.Get("58c31cfd-6cf0-42c8-9689-45b31f2374cb");
 
-            Assert.Equal("Chad", users.Name);
+            Assert.Equal("Chad Tolkien", users.Name);
         }
     }
 }

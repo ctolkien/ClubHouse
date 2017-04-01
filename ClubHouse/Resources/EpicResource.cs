@@ -1,5 +1,6 @@
 ﻿using ClubHouse.Models;
 using System.Threading.Tasks;
+using System;
 
 namespace ClubHouse.Resources
 {
@@ -11,34 +12,28 @@ namespace ClubHouse.Resources
         {
         }
 
-        //TODO: Clean this up
-        public Task<Epic> Update(Epic model, int afterId = 0, int beforeId = 0)
+        public Task<Epic> Create(Epic model)
         {
-            if (afterId > 0)
-            {
-                var foo = (EpicUpdate)model;
-                foo.AfterId = afterId;
-                return base.Update(model);
-            }
-            else if (beforeId > 0) {
-                var foo = (EpicUpdate)model;
-                foo.BeforeId = afterId;
-                return base.Update(model);
-
-            }
-            return base.Update(model);
+            return base.Create(model);
         }
 
+        public Task<Epic> Update(Epic model)
+        {
+            return base.Create(model);
+        }
+
+
+        //TODO: Add options for setting position
     }
 
     public interface IEpicResource : IEpicResource<Epic, int> { }
 
     public interface IEpicResource<TModel, TKey> :
-        IListable<TModel>,
-        ICreateable<TModel>,
+        IListable<TModel, TKey>,
+        ICreateable<TModel, TModel, TKey>,
         IGettable<TModel, TKey>,
-        IUpdateable<TModel>,
-        IDeletable<TKey>
+        IUpdateable<TModel, TModel, TKey>,
+        IDeletable<TKey> where TModel : ClubHouseModel<TKey>
     {
     }
 }

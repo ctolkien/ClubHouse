@@ -1,10 +1,10 @@
 ﻿namespace ClubHouse.Test
 {
-    public abstract class TestBase
+    public static class TestHelpers
     {
-        protected static ClubHouseClient CreateClient()
+        public static ClubHouseClient CreateClient()
         {
-            return new ClubHouseClient("");
+            return new ClubHouseClient("58dd7c22-4b4c-4961-aa65-3ae2c0edc411");
         }
     }
 }

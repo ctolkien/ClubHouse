@@ -2,10 +2,11 @@ using ClubHouse.Models;
 using System;
 using System.Threading.Tasks;
 using Xunit;
+using static ClubHouse.Test.TestHelpers;
 
 namespace ClubHouse.Test
 {
-    public class EpicTests : TestBase
+    public class EpicTests
     {
 
         [Fact]
@@ -41,11 +42,11 @@ namespace ClubHouse.Test
 
             var foo = await client.Epics.List();
 
-            Assert.Equal(1, foo.Count);
+            Assert.Equal(4, foo.Count);
         }
 
         [Fact]
-        public async Task CreateEpics()
+        public async Task CreateEpic()
         {
             var client = CreateClient();
 
@@ -55,6 +56,13 @@ namespace ClubHouse.Test
             });
 
             Assert.Equal("Wasahhh", foo.Name);
+        }
+
+        [Fact]
+        public async Task DeleteEpic()
+        {
+            var client = CreateClient();
+            await client.Epics.Delete(10);
         }
 
 

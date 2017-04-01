@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using static ClubHouse.Test.TestHelpers;
+
 
 namespace ClubHouse.Test
 {
-    public class ProjectTests : TestBase
+    public class ProjectTests
     {
 
         [Fact]

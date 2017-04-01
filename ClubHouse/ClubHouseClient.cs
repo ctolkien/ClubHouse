@@ -24,12 +24,14 @@ namespace ClubHouse
             Projects = new ProjectResource(HttpClient);
             Epics = new EpicResource(HttpClient);
             Users = new UserResource(HttpClient);
+            Labels = new LabelResource(HttpClient);
 
         }
 
         public IProjectResource Projects { get; }
         public IEpicResource Epics { get; }
         public IUserResource Users { get; }
+        public ILabelResource Labels { get; }
 
         public void Dispose()
         {

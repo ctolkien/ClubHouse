@@ -12,6 +12,14 @@ namespace ClubHouse.Resources
 
     }
 
-    public interface IStoryLinkResource : ICreateable<StoryLink>, IGettable<StoryLink, int>, IDeletable<int>
+    public interface IStoryLinkResource : IStoryLinkResource<StoryLink, int>
     { }
+
+    public interface IStoryLinkResource<TModel, TKey> :
+        ICreateable<TModel, TModel, TKey>,
+        IGettable<TModel, TKey>,
+        IDeletable<TKey> where TModel : ClubHouseModel<TKey>
+    {
+
+    }
 }

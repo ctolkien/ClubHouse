@@ -2,8 +2,8 @@
 
 namespace ClubHouse.Resources
 {
-    public interface IDeletable<T>
+    public interface IDeletable<TKey>
     {
-        Task Delete(T id);
+        Task Delete(TKey id);
     }
 }

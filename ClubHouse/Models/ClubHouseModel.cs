@@ -1,8 +1,10 @@
-﻿namespace ClubHouse.Models
+﻿using ClubHouse.Serialization;
+
+namespace ClubHouse.Models
 {
     public abstract class ClubHouseModel<T>
     {
-        [HideFromUpdate]
+        [HideFromUpdate, HideFromCreate]
         public T Id { get; set; }
     }
 
