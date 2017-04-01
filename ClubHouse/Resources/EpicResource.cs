@@ -1,6 +1,5 @@
 ﻿using ClubHouse.Models;
 using System.Threading.Tasks;
-using System;
 
 namespace ClubHouse.Resources
 {

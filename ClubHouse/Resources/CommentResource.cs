@@ -7,7 +7,7 @@ namespace ClubHouse.Resources
         private readonly int _storyId;
 
         protected override string ResourceName => $"{_storyId}/comments";
-        public CommentResource(int storyId, ClubHouseHttpClient client) : base(client)
+        internal CommentResource(int storyId, ClubHouseHttpClient client) : base(client)
         {
             _storyId = storyId;
         }

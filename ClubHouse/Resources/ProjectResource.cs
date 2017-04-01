@@ -15,7 +15,7 @@ namespace ClubHouse.Resources
         }
 
 
-        public virtual async Task<IReadOnlyList<Story>> ListStories(int id)
+        public async Task<IReadOnlyList<Story>> ListStories(int id)
         {
             var result = await _client.GetAsync($"{ResourceUrl(id)}/stories");
             var content = await result.Content.ReadAsStringAsync();

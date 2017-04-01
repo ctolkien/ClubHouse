@@ -6,7 +6,7 @@ namespace ClubHouse.Resources
     {
         protected override string ResourceName => "stories";
 
-        public StoryResource(ClubHouseHttpClient client) : base(client)
+        internal StoryResource(ClubHouseHttpClient client) : base(client)
         {
         }
 
