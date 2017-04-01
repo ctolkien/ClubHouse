@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClubHouse.Serialization;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
@@ -46,6 +47,8 @@ namespace ClubHouse.Test
 
     static class MockExtensions
     {
+        const string EndPoint = "https://api.clubhouse.io/api/v1/";
+
         public static MockedResponseHandler Epic(this MockedResponseHandler handler)
         {
             var content = new Models.Epic
@@ -77,13 +80,14 @@ namespace ClubHouse.Test
 
             };
 
+
             var responseMessage = new HttpResponseMessage
             {
                 StatusCode = HttpStatusCode.Created,
-                Content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(content))
+                Content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(content, new DefaultSerializerSettings()))
             };
 
-            handler.AddFakeGetResponse(new Uri(""), responseMessage);
+            handler.AddFakeGetResponse(new Uri($"{EndPoint}epics/1"), responseMessage);
 
             return handler;
         }

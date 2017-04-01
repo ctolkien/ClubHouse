@@ -13,10 +13,10 @@ namespace ClubHouse.Test
         {
             var client = CreateClient();
 
-            var foo = await client.Epics.Get(10);
+            var response = await client.Epics.Get(1);
 
-            Assert.Equal(10, foo.Id);
-            Assert.Equal(EpicState.InProgress, foo.State);
+            Assert.Equal(123, response.Id);
+            Assert.Equal(EpicState.ToDo, response.State);
         }
 
         [Fact]

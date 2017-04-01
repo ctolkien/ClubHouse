@@ -2,10 +2,12 @@
 {
     public static class TestHelpers
     {
-        private const string apiKey = "";
+        private const string apiKey = "replaceme";
+
         public static ClubHouseClient CreateClient()
         {
-            return new ClubHouseClient(apiKey);
+            var client = new ClubHouseClient(apiKey, new MockedResponseHandler().Epic());
+            return client;
         }
     }
 }

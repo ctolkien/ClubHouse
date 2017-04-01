@@ -1,5 +1,6 @@
 ﻿using ClubHouse.Resources;
 using System;
+using System.Net.Http;
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("ClubHouse.Test")]
@@ -11,15 +12,17 @@ namespace ClubHouse
         const string EndPoint = "https://api.clubhouse.io/api/v1/";
         internal ClubHouseHttpClient HttpClient;
 
-        public ClubHouseClient(string apiToken)
+        public ClubHouseClient(string apiToken) : this (apiToken, new HttpClientHandler())
+        {
+
+        }
+
+        internal ClubHouseClient(string apiToken, HttpMessageHandler messageHandler)
         {
             if (string.IsNullOrEmpty(apiToken))
                 throw new ArgumentNullException(nameof(apiToken));
 
-            HttpClient = new ClubHouseHttpClient(apiToken)
-            {
-                BaseAddress = new Uri(EndPoint)
-            };
+            HttpClient = new ClubHouseHttpClient(apiToken, EndPoint, messageHandler);
 
             Epics = new EpicResource(HttpClient);
             Files = new FileResource(HttpClient);
