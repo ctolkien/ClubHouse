@@ -25,7 +25,7 @@ namespace ClubHouse.Models
         public DateTime UpdatedAt { get; set; }
     }
 
-    internal class EpicUpdate : Epic
+    public class EpicUpdate : Epic
     {
         public int? AfterId { get; set; }
         public int? BeforeId { get; set; }

@@ -33,6 +33,19 @@ namespace ClubHouse.Resources
 
             return JsonConvert.DeserializeObject<IList<TModel>>(content, DefaultSettings());
         }
+        public virtual async Task<TModel> Get(TKey id)
+        {
+            var result = await _client.GetAsync(ResourceUrl(id));
+            var content = await result.Content.ReadAsStringAsync();
+
+            return JsonConvert.DeserializeObject<TModel>(content, DefaultSettings());
+        }
+
+        public virtual async Task<TModel> Create(TModel model)
+        {
+            return await Create<TModel>(model);
+        }
+
 
         public virtual async Task<TModel> Create<TInput>(TInput model) where TInput : ClubHouseModel<TKey>
         {
@@ -43,12 +56,10 @@ namespace ClubHouse.Resources
             return JsonConvert.DeserializeObject<TModel>(await result.Content.ReadAsStringAsync(), DefaultSettings());
         }
 
-        public virtual async Task<TModel> Get(TKey id)
-        {
-            var result = await _client.GetAsync(ResourceUrl(id));
-            var content = await result.Content.ReadAsStringAsync();
 
-            return JsonConvert.DeserializeObject<TModel>(content, DefaultSettings());
+        public virtual async Task<TModel> Update(TModel model)
+        {
+            return await Update<TModel>(model);
         }
 
         public virtual async Task<TModel> Update<TInput>(TInput model) where TInput: ClubHouseModel<TKey>

@@ -1,6 +1,6 @@
-﻿using System;
+﻿using ClubHouse.Exceptions;
+using System;
 using System.Net.Http;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -15,7 +15,7 @@ namespace ClubHouse
 
             _apiToken = apiToken;
         }
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             var builder = new UriBuilder(request.RequestUri)
             {
@@ -30,7 +30,19 @@ namespace ClubHouse
                 request.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
             }
 
-            return base.SendAsync(request, cancellationToken);
+            var result = await base.SendAsync(request, cancellationToken);
+
+            switch (result.StatusCode)
+            {
+                case System.Net.HttpStatusCode.BadRequest:
+                    throw new BadRequestException();
+                case System.Net.HttpStatusCode.NotFound:
+                    throw new NotFoundException();
+                case ((System.Net.HttpStatusCode)422):
+                    throw new UnprocessableException();
+            }
+
+            return result;
         }
 
     }

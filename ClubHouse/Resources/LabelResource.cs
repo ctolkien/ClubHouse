@@ -12,7 +12,15 @@ namespace ClubHouse.Resources
         {
         }
 
+        public Task<LabelWithCounts> Create(Label model)
+        {
+            return base.Create(model);
+        }
 
+        public Task<LabelWithCounts> Update(Label model)
+        {
+            return base.Update(model);
+        }
     }
 
     public interface ILabelResource : ILabelResource<LabelWithCounts, int>

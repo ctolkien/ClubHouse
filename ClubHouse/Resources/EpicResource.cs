@@ -12,18 +12,12 @@ namespace ClubHouse.Resources
         {
         }
 
-        public Task<Epic> Create(Epic model)
+        public Task<Epic> Update(EpicUpdate model)
         {
-            return base.Create(model);
-        }
-
-        public Task<Epic> Update(Epic model)
-        {
-            return base.Create(model);
+            return Update(model);
         }
 
 
-        //TODO: Add options for setting position
     }
 
     public interface IEpicResource : IEpicResource<Epic, int> { }
@@ -32,7 +26,7 @@ namespace ClubHouse.Resources
         IListable<TModel, TKey>,
         ICreateable<TModel, TModel, TKey>,
         IGettable<TModel, TKey>,
-        IUpdateable<TModel, TModel, TKey>,
+        IUpdateable<TModel, EpicUpdate, int>,
         IDeletable<TKey> where TModel : ClubHouseModel<TKey>
     {
     }

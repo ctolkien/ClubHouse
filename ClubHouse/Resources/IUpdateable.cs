@@ -3,8 +3,12 @@ using System.Threading.Tasks;
 
 namespace ClubHouse.Resources
 {
-    public interface IUpdateable<TModel, TInput, TKey> where TInput : ClubHouseModel<TKey>
+
+    public interface IUpdateable<TModel, TInput, TKey> where TModel : ClubHouseModel<TKey>
     {
-        Task<TModel> Update<TInputModel>(TInputModel model) where TInputModel : ClubHouseModel<TKey>;
+        Task<TModel> Update(TInput model);
     }
+
+
+
 }

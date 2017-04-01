@@ -5,7 +5,8 @@ namespace ClubHouse
 {
     public class ClubHouseHttpClient : HttpClient
     {
-        public ClubHouseHttpClient(string apiToken, string endPoint) : this(apiToken, endPoint, new ClubHouseHttpMessageHandler(apiToken))
+        public ClubHouseHttpClient(string apiToken, string endPoint) :
+            this(apiToken, endPoint, new ClubHouseHttpMessageHandler(apiToken))
         {
         }
 

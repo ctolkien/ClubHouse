@@ -19,8 +19,8 @@ namespace ClubHouse.Resources
 
     }
     public interface ICommentResource<TModel, TKey> :
-        ICreateable<TModel, TModel, TKey>,
-        IUpdateable<TModel, TModel, TKey>,
+        ICreateable<TModel, TKey>,
+        IUpdateable<TModel, TKey>,
         IGettable<TModel, TKey>,
         IDeletable<TKey>
         where TModel : ClubHouseModel<TKey>

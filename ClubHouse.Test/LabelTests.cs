@@ -17,6 +17,9 @@ namespace ClubHouse.Test
                 Name = "This is my test label #2"
             });
 
+            await client.Labels.Update(new Models.Label());
+
+
             Assert.Equal(0, label.NumStoriesCompleted);
         }
     }

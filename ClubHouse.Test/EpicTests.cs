@@ -24,7 +24,7 @@ namespace ClubHouse.Test
         {
             var client = CreateClient();
 
-            var e = new Epic
+            var e = new EpicUpdate
             {
                 Id = 22,
                 Name = "new epic name #2",
@@ -65,16 +65,5 @@ namespace ClubHouse.Test
         }
 
 
-        [Fact]
-        public async Task UpdateEpicSettingBeforeId()
-        {
-            throw new NotImplementedException();
-        }
-
-        [Fact]
-        public async Task UpdateEpicSettingAfterId()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

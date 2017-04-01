@@ -14,7 +14,6 @@ namespace ClubHouse
 
         public ClubHouseClient(string apiToken) : this (apiToken, new HttpClientHandler())
         {
-
         }
 
         internal ClubHouseClient(string apiToken, HttpMessageHandler messageHandler)
