@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace ClubHouse.Models
 {
@@ -8,7 +7,7 @@ namespace ClubHouse.Models
     public class User : ClubHouseModel<string>
     {
         public bool TwoFactorAuthActivated { get; set; }
-        public IList<Permission> Permissions { get; set; }
+        public IReadOnlyList<Permission> Permissions { get; set; }
         public string Name { get; set; }
         public bool Deactivated { get; set; }
         public string Username { get; set; }

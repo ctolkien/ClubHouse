@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace ClubHouse.Models
 {
@@ -8,7 +7,7 @@ namespace ClubHouse.Models
     {
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-        public IList<State> States { get; set; }
+        public IReadOnlyList<State> States { get; set; }
         public int DefaultStateId { get; set; }
 
 

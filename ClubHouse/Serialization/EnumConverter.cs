@@ -7,7 +7,6 @@ namespace ClubHouse.Serialization
 {
     internal class EnumConverter : StringEnumConverter
     {
-
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             //Todo: make this more resiliant

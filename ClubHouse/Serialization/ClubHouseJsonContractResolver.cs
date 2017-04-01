@@ -28,11 +28,7 @@ namespace ClubHouse.Serialization
                         };
                 }
             }
-
             return property;
         }
-
     }
-
-
 }

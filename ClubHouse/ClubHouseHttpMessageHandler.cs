@@ -12,7 +12,6 @@ namespace ClubHouse
 
         public ClubHouseHttpMessageHandler(string apiToken) : base(new HttpClientHandler())
         {
-
             _apiToken = apiToken;
         }
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)

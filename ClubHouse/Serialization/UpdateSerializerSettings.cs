@@ -4,7 +4,6 @@ using System;
 
 namespace ClubHouse.Serialization
 {
-
     internal class DefaultSerializerSettings : JsonSerializerSettings
     {
         public DefaultSerializerSettings()
@@ -28,7 +27,8 @@ namespace ClubHouse.Serialization
     }
 
     internal class CreateSerializerSettings : ClubHouseContractResolverSerializerSettings<HideFromCreateAttribute>
-    { }
+    {
+    }
 
     internal class UpdateSerializerSettings : ClubHouseContractResolverSerializerSettings<HideFromUpdateAttribute>
     {

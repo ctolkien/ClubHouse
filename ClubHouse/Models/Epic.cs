@@ -14,7 +14,7 @@ namespace ClubHouse.Models
         public string Name { get; set; }
 
         [HideFromUpdate]
-        public IList<Comment> Comments { get; set; }
+        public IReadOnlyList<Comment> Comments { get; set; }
         [HideFromCreate]
         public bool Archived { get; set; }
         public string Description { get; set; }
