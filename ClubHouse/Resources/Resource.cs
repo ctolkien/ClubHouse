@@ -26,12 +26,12 @@ namespace ClubHouse.Resources
             return $"{ResourceName}/{id}";
         }
 
-        public virtual async Task<IList<TModel>> List()
+        public virtual async Task<IReadOnlyList<TModel>> List()
         {
             var result = await _client.GetAsync(ResourceName);
             var content = await result.Content.ReadAsStringAsync();
 
-            return JsonConvert.DeserializeObject<IList<TModel>>(content, DefaultSettings());
+            return JsonConvert.DeserializeObject<IReadOnlyList<TModel>>(content, DefaultSettings());
         }
         public virtual async Task<TModel> Get(TKey id)
         {

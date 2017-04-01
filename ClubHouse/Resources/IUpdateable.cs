@@ -4,7 +4,9 @@ using System.Threading.Tasks;
 namespace ClubHouse.Resources
 {
 
-    public interface IUpdateable<TModel, TInput, TKey> where TModel : ClubHouseModel<TKey>
+    public interface IUpdateable<TModel, TInput, TKey>
+        where TModel : ClubHouseModel<TKey>
+        where TInput : ClubHouseModel<TKey>
     {
         Task<TModel> Update(TInput model);
     }

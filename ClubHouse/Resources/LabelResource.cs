@@ -23,14 +23,11 @@ namespace ClubHouse.Resources
         }
     }
 
-    public interface ILabelResource : ILabelResource<LabelWithCounts, int>
-    { }
-
-    public interface ILabelResource<TModel, TKey> :
-        IListable<TModel, TKey>,
-        ICreateable<TModel, Label, int>,
-        IUpdateable<TModel, Label, int>,
-        IDeletable<TKey> where TModel : ClubHouseModel<int>
+    public interface ILabelResource :
+        IListable<LabelWithCounts, int>,
+        ICreateable<LabelWithCounts, Label, int>,
+        IUpdateable<LabelWithCounts, Label, int>,
+        IDeletable<int>
     {
 
     }

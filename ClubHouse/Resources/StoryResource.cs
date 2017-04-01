@@ -6,8 +6,6 @@ namespace ClubHouse.Resources
     {
         protected override string ResourceName => "stories";
 
-
-
         public StoryResource(ClubHouseHttpClient client) : base(client)
         {
         }
@@ -26,20 +24,15 @@ namespace ClubHouse.Resources
         //todo update multiple
     }
 
-    public interface IStoryResource : IStoryResource<Story, int>
+    public interface IStoryResource :
+        ICreateable<Story, Story, int>,
+        IGettable<Story, int>,
+        IUpdateable<Story, Story, int>,
+        IDeletable<int>
     {
         ITaskResource Tasks(int id);
         ICommentResource Comments(int id);
 
     }
 
-    public interface IStoryResource<TModel, TKey> :
-        ICreateable<TModel, TModel, TKey>,
-        IGettable<TModel, TKey>,
-        IUpdateable<TModel, TModel, TKey>,
-        IDeletable<TKey>
-        where TModel : ClubHouseModel<TKey>
-    {
-
-    }
 }

@@ -8,18 +8,11 @@ namespace ClubHouse.Resources
         internal UserResource(ClubHouseHttpClient client) : base(client)
         {
         }
-
-
     }
 
-    public interface IUserResource : IUserResource<User, string>
-    {
-
-    }
-
-    public interface IUserResource<TModel, TKey> :
-        IListable<TModel, TKey>,
-        IGettable<TModel, TKey> where TModel : ClubHouseModel<TKey>
+    public interface IUserResource :
+        IListable<User, string>,
+        IGettable<User, string>
     {
     }
 }

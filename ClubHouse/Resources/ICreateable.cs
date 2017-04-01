@@ -3,7 +3,9 @@ using System.Threading.Tasks;
 
 namespace ClubHouse.Resources
 {
-    public interface ICreateable<TModel, TInput, TKey> where TInput : ClubHouseModel<TKey>
+    public interface ICreateable<TModel, TInput, TKey>
+        where TInput : ClubHouseModel<TKey>
+        where TModel : ClubHouseModel<TKey>
     {
         Task<TModel> Create(TInput model);
     }

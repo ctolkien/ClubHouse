@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 namespace ClubHouse.Resources
 {
     public interface IListable<TModel, TKey>
+        where TModel : ClubHouseModel<TKey>
+
     {
-        Task<IList<TModel>> List();
+        Task<IReadOnlyList<TModel>> List();
     }
 }

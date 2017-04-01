@@ -15,27 +15,24 @@ namespace ClubHouse.Resources
         }
 
 
-        public virtual async Task<IList<Story>> ListStories(int id)
+        public virtual async Task<IReadOnlyList<Story>> ListStories(int id)
         {
             var result = await _client.GetAsync($"{ResourceUrl(id)}/stories");
             var content = await result.Content.ReadAsStringAsync();
 
-            return JsonConvert.DeserializeObject<IList<Story>>(content, DefaultSettings());
+            return JsonConvert.DeserializeObject<IReadOnlyList<Story>>(content, DefaultSettings());
         }
 
     }
 
-    public interface IProjectResource : IProjectResource<Project, int>
+    public interface IProjectResource :
+        IListable<Project, int>,
+        IGettable<Project, int>,
+        IUpdateable<Project, Project, int>,
+        ICreateable<Project, Project, int>,
+        IDeletable<int>
     {
-        Task<IList<Story>> ListStories(int id);
+        Task<IReadOnlyList<Story>> ListStories(int id);
     }
 
-    public interface IProjectResource<TModel, TKey> :
-        IListable<TModel, TKey>,
-        IGettable<TModel, TKey>,
-        IUpdateable<TModel, TModel, TKey>,
-        ICreateable<TModel, TModel, TKey>,
-        IDeletable<TKey> where TModel : ClubHouseModel<TKey>
-    {
-    }
 }

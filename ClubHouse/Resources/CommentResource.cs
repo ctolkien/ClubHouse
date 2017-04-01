@@ -14,16 +14,11 @@ namespace ClubHouse.Resources
 
     }
 
-    public interface ICommentResource : ICommentResource<Comment, int>
-    {
-
-    }
-    public interface ICommentResource<TModel, TKey> :
-        ICreateable<TModel, TKey>,
-        IUpdateable<TModel, TKey>,
-        IGettable<TModel, TKey>,
-        IDeletable<TKey>
-        where TModel : ClubHouseModel<TKey>
+    public interface ICommentResource :
+        ICreateable<Comment, Comment, int>,
+        IUpdateable<Comment, Comment, int>,
+        IGettable<Comment, int>,
+        IDeletable<int>
     {
 
     }

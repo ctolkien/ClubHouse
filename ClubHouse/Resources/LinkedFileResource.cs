@@ -12,16 +12,12 @@ namespace ClubHouse.Resources
 
     }
 
-    public interface ILinkedFileResource : ILinkedFileResource<LinkedFile, int>
-    {
-    }
-
-    public interface ILinkedFileResource<TModel, TKey> :
-        IListable<TModel, TKey>,
-        ICreateable<TModel, TModel, TKey>,
-        IGettable<TModel, TKey>,
-        IUpdateable<TModel, TModel, TKey>,
-        IDeletable<TKey> where TModel : ClubHouseModel<TKey>
+    public interface ILinkedFileResource :
+        IListable<LinkedFile, int>,
+        ICreateable<LinkedFile, LinkedFile, int>,
+        IGettable<LinkedFile, int>,
+        IUpdateable<LinkedFile, LinkedFile, int>,
+        IDeletable<int>
     {
     }
 

@@ -5,7 +5,7 @@ This is a .NET Standard library for the ClubHouse API. Non-blocking async turtle
 ```
 install-package ClubHouse
 ```
-
+or 
 ```
 dotnet add package ClubHouse
 ```

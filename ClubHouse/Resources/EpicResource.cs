@@ -17,17 +17,14 @@ namespace ClubHouse.Resources
             return Update(model);
         }
 
-
     }
 
-    public interface IEpicResource : IEpicResource<Epic, int> { }
-
-    public interface IEpicResource<TModel, TKey> :
-        IListable<TModel, TKey>,
-        ICreateable<TModel, TModel, TKey>,
-        IGettable<TModel, TKey>,
-        IUpdateable<TModel, EpicUpdate, int>,
-        IDeletable<TKey> where TModel : ClubHouseModel<TKey>
+    public interface IEpicResource :
+        IListable<Epic, int>,
+        ICreateable<Epic, Epic, int>,
+        IGettable<Epic, int>,
+        IUpdateable<Epic, EpicUpdate, int>,
+        IDeletable<int>
     {
     }
 }

@@ -11,13 +11,10 @@ namespace ClubHouse.Resources
 
     }
 
-    public interface IFileResource : IFileResource<File, int>
-    {
-    }
-    public interface IFileResource<TModel, TKey> :
-        IGettable<TModel, TKey>,
-        IListable<TModel, TKey>,
-        IUpdateable<TModel, TModel, TKey>,
-        IDeletable<TKey> where TModel : ClubHouseModel<TKey>
+    public interface IFileResource :
+        IGettable<File, int>,
+        IListable<File, int>,
+        IUpdateable<File, File, int>,
+        IDeletable<int>
     { }
 }
