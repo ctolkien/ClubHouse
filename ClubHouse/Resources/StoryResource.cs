@@ -34,5 +34,4 @@ namespace ClubHouse.Resources
         ICommentResource Comments(int id);
 
     }
-
 }

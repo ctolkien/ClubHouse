@@ -28,6 +28,5 @@ namespace ClubHouse.Resources
         IUpdateable<LabelWithCounts, Label, int>,
         IDeletable<int>
     {
-
     }
 }

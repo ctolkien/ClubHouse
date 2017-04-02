@@ -9,6 +9,4 @@ namespace ClubHouse.Resources
     {
         Task<TModel> Create(TInput model);
     }
-
-
 }

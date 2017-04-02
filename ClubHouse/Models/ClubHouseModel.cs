@@ -7,5 +7,4 @@ namespace ClubHouse.Models
         [HideFromUpdate, HideFromCreate]
         public T Id { get; set; }
     }
-
 }

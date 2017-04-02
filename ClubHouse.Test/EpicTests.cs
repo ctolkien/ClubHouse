@@ -63,7 +63,5 @@ namespace ClubHouse.Test
             var client = CreateClient();
             await client.Epics.Delete(10);
         }
-
-
     }
 }

@@ -16,5 +16,6 @@ namespace ClubHouse.Resources
         IListable<File, int>,
         IUpdateable<File, File, int>,
         IDeletable<int>
-    { }
+    {
+    }
 }

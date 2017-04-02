@@ -8,8 +8,6 @@ namespace ClubHouse.Resources
         internal LinkedFileResource(ClubHouseHttpClient client) : base(client)
         {
         }
-
-
     }
 
     public interface ILinkedFileResource :
@@ -20,5 +18,4 @@ namespace ClubHouse.Resources
         IDeletable<int>
     {
     }
-
 }

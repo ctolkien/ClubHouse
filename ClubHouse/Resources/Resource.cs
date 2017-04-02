@@ -77,6 +77,4 @@ namespace ClubHouse.Resources
         }
 
     }
-
-
 }

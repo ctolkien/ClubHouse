@@ -43,6 +43,5 @@ namespace ClubHouse
 
             return result;
         }
-
     }
 }

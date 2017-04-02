@@ -19,6 +19,4 @@ namespace ClubHouse.Models
         public DateTime UpdatedAt { get; set; }
         public string Url { get; set; }
     }
-
-
 }

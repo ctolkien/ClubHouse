@@ -11,5 +11,4 @@ namespace ClubHouse.Models
         public string Type { get; set; }
         public int ObjectId { get; set; }
     }
-
 }

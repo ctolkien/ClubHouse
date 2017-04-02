@@ -11,7 +11,6 @@ namespace ClubHouse.Resources
         {
             _storyId = storyId;
         }
-
     }
 
     public interface ITaskResource :

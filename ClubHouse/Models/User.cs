@@ -23,5 +23,4 @@ namespace ClubHouse.Models
         public DateTime UpdatedAt { get; set; }
         public string Role { get; set; }
     }
-
 }

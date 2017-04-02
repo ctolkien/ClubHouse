@@ -16,6 +16,7 @@ namespace ClubHouse
         {
         }
 
+        //This constructure is used for testing only - allows you to inject your own message handler
         internal ClubHouseClient(string apiToken, HttpMessageHandler messageHandler)
         {
             if (string.IsNullOrEmpty(apiToken))

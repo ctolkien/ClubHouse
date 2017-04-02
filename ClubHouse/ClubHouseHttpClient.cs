@@ -10,11 +10,9 @@ namespace ClubHouse
         {
         }
 
-
         internal ClubHouseHttpClient(string apiToken, string endPoint, HttpMessageHandler messageHandler) : base(messageHandler)
         {
             BaseAddress = new Uri(endPoint);
         }
-
     }
 }

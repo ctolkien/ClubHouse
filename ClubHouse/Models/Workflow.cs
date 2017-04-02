@@ -10,7 +10,6 @@ namespace ClubHouse.Models
         public IReadOnlyList<State> States { get; set; }
         public int DefaultStateId { get; set; }
 
-
         public class State : ClubHouseModel<int>
         {
             public int Position { get; set; }
@@ -30,6 +29,5 @@ namespace ClubHouse.Models
             Started,
             Done
         }
-
     }
 }

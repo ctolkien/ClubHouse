@@ -34,5 +34,4 @@ namespace ClubHouse.Resources
     {
         Task<IReadOnlyList<Story>> ListStories(int id);
     }
-
 }

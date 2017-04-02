@@ -15,7 +15,6 @@ namespace ClubHouse.Resources
         {
             return Update(model);
         }
-
     }
 
     public interface IEpicResource :

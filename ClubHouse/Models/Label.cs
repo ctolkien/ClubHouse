@@ -22,5 +22,4 @@ namespace ClubHouse.Models
         [HideFromUpdate, HideFromCreate]
         public int NumStoriesCompleted { get; set; }
     }
-
 }

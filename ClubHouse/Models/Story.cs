@@ -40,5 +40,4 @@ namespace ClubHouse.Models
         public DateTime CompletedAt { get; set; }
         public bool Complete { get; set; }
     }
-
 }

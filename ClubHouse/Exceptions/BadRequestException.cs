@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ClubHouse.Exceptions
 {
@@ -9,19 +7,6 @@ namespace ClubHouse.Exceptions
     {
         public BadRequestException()
         {
-
         }
-    }
-
-    [Serializable]
-    public class NotFoundException : Exception
-    {
-
-    }
-
-    [Serializable]
-    public class UnprocessableException : Exception
-    {
-
     }
 }

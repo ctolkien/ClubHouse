@@ -20,6 +20,5 @@ namespace ClubHouse.Resources
         IGettable<Comment, int>,
         IDeletable<int>
     {
-
     }
 }
