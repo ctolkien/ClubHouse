@@ -20,7 +20,9 @@ namespace ClubHouse
         internal ClubHouseClient(string apiToken, HttpMessageHandler messageHandler)
         {
             if (string.IsNullOrEmpty(apiToken))
+            {
                 throw new ArgumentNullException(nameof(apiToken));
+            }
 
             HttpClient = new ClubHouseHttpClient(apiToken, EndPoint, messageHandler);
 
