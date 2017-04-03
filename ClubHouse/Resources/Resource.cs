@@ -1,7 +1,6 @@
 ﻿using ClubHouse.Models;
 using ClubHouse.Serialization;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -12,9 +11,9 @@ namespace ClubHouse.Resources
         protected readonly ClubHouseHttpClient _client;
         protected abstract string ResourceName { get; }
 
-        protected static Func<JsonSerializerSettings> DefaultUpdateSettings = () => new UpdateSerializerSettings();
-        protected static Func<JsonSerializerSettings> DefaultCreateSettings = () => new CreateSerializerSettings();
-        protected static Func<JsonSerializerSettings> DefaultSettings = () => new DefaultSerializerSettings();
+        protected static JsonSerializerSettings DefaultUpdateSettings = new UpdateSerializerSettings();
+        protected static JsonSerializerSettings DefaultCreateSettings = new CreateSerializerSettings();
+        protected static JsonSerializerSettings DefaultSettings = new DefaultSerializerSettings();
 
         internal Resource(ClubHouseHttpClient client)
         {
@@ -31,14 +30,14 @@ namespace ClubHouse.Resources
             var result = await _client.GetAsync(ResourceName);
             var content = await result.Content.ReadAsStringAsync();
 
-            return JsonConvert.DeserializeObject<IReadOnlyList<TModel>>(content, DefaultSettings());
+            return JsonConvert.DeserializeObject<IReadOnlyList<TModel>>(content, DefaultSettings);
         }
         public virtual async Task<TModel> Get(TKey id)
         {
             var result = await _client.GetAsync(ResourceUrl(id));
             var content = await result.Content.ReadAsStringAsync();
 
-            return JsonConvert.DeserializeObject<TModel>(content, DefaultSettings());
+            return JsonConvert.DeserializeObject<TModel>(content, DefaultSettings);
         }
 
         public virtual async Task<TModel> Create(TModel model)
@@ -49,11 +48,11 @@ namespace ClubHouse.Resources
 
         public virtual async Task<TModel> Create<TInput>(TInput model) where TInput : ClubHouseModel<TKey>
         {
-            var serialized = JsonConvert.SerializeObject(model, DefaultCreateSettings());
+            var serialized = JsonConvert.SerializeObject(model, DefaultCreateSettings);
             var httpConent = new System.Net.Http.StringContent(serialized);
             var result = await _client.PostAsync(ResourceName, httpConent);
 
-            return JsonConvert.DeserializeObject<TModel>(await result.Content.ReadAsStringAsync(), DefaultSettings());
+            return JsonConvert.DeserializeObject<TModel>(await result.Content.ReadAsStringAsync(), DefaultSettings);
         }
 
 
@@ -64,11 +63,12 @@ namespace ClubHouse.Resources
 
         public virtual async Task<TModel> Update<TInput>(TInput model) where TInput: ClubHouseModel<TKey>
         {
-            var serialized = JsonConvert.SerializeObject(model, DefaultUpdateSettings());
+
+            var serialized = JsonConvert.SerializeObject(model, DefaultUpdateSettings);
             var httpConent = new System.Net.Http.StringContent(serialized);
             var result = await _client.PutAsync(ResourceUrl(model.Id), httpConent);
 
-            return JsonConvert.DeserializeObject<TModel>(await result.Content.ReadAsStringAsync(), DefaultSettings());
+            return JsonConvert.DeserializeObject<TModel>(await result.Content.ReadAsStringAsync(), DefaultSettings);
         }
 
         public virtual async Task Delete(TKey id)
