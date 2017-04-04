@@ -4,6 +4,15 @@ This is a .NET Standard library for the [Clubhouse.io](https://clubhouse.io) API
 
 Non-blocking async turtles all the way down!
 
+| Platform | Status|
+|---------|-------|
+|Windows  | [![Build status](https://img.shields.io/appveyor/ci/Soda-Digital/clubhouse.svg?maxAge=200)](https://ci.appveyor.com/project/Soda-Digital/clubhouse) |
+|Linux | [![Build Status](https://img.shields.io/travis/ctolkien/ClubHouse.svg?maxAge=200)](https://travis-ci.org/ctolkien/ClubHouse) |
+
+![Version](https://img.shields.io/nuget/v/ClubHouse.svg?maxAge=200)
+![license](https://img.shields.io/github/license/ctolkien/ClubHouse.svg?maxAge=2592000)
+
+
 ```
 install-package ClubHouse
 ```
