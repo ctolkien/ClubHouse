@@ -12,6 +12,7 @@ build_script:
 - dotnet restore -v Minimal
 - dotnet build -c %CONFIGURATION%
 - dotnet pack -c %CONFIGURATION% .\ClubHouse\ClubHouse.csproj -o .\artifacts 
+test: off
 artifacts:
 - path: .\src\artifacts\**\*.*
 deploy:
