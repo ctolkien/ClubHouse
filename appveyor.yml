@@ -14,9 +14,6 @@ build_script:
 - dotnet pack -c %CONFIGURATION% .\ClubHouse\ClubHouse.csproj -o .\artifacts 
 artifacts:
 - path: .\src\artifacts\**\*.*
-before_test:
-test_script:
-#- dotnet test .\ClubHouse.Test\ClubHouser.Test.csproj
 deploy:
 - provider: NuGet
   api_key:
