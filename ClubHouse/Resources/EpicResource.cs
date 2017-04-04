@@ -13,7 +13,7 @@ namespace ClubHouse.Resources
 
         public Task<Epic> Update(EpicUpdate model)
         {
-            return Update(model);
+            return base.Update(model);
         }
     }
 

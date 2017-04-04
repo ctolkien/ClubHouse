@@ -20,7 +20,7 @@ namespace ClubHouse.Resources
             var result = await _client.GetAsync($"{ResourceUrl(id)}/stories");
             var content = await result.Content.ReadAsStringAsync();
 
-            return JsonConvert.DeserializeObject<IReadOnlyList<Story>>(content, DefaultSettings());
+            return JsonConvert.DeserializeObject<IReadOnlyList<Story>>(content, DefaultSettings);
         }
 
     }

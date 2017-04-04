@@ -12,7 +12,7 @@ namespace ClubHouse
         const string EndPoint = "https://api.clubhouse.io/api/v1/";
         internal ClubHouseHttpClient HttpClient;
 
-        public ClubHouseClient(string apiToken) : this (apiToken, new HttpClientHandler())
+        public ClubHouseClient(string apiToken) : this (apiToken, new ClubHouseHttpMessageHandler(apiToken))
         {
         }
 

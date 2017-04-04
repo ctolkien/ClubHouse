@@ -13,6 +13,7 @@ namespace ClubHouse.Serialization
                 NamingStrategy = new SnakeCaseNamingStrategy()
             };
             NullValueHandling = NullValueHandling.Ignore;
+            //base.DefaultValueHandling = DefaultValueHandling.Ignore;
 
             Converters.Add(new EnumConverter());
         }

@@ -1,4 +1,7 @@
 ﻿using ClubHouse.Models;
+using System.Collections.Generic;
+using System;
+using System.Threading.Tasks;
 
 namespace ClubHouse.Resources
 {
@@ -20,8 +23,16 @@ namespace ClubHouse.Resources
             return new CommentResource(id, _client);
         }
 
-        //todo create multiple
-        //todo update multiple
+        public async Task<IReadOnlyList<Story>> Create(IEnumerable<Story> stories)
+        {
+           return await base.Create<Story, IReadOnlyList<Story>>(stories);
+        }
+
+        public async Task<IReadOnlyList<Story>> Update(IEnumerable<Story> stories)
+        {
+            return await base.Update<Story, IReadOnlyList<Story>>(stories);
+        }
+
     }
 
     public interface IStoryResource :
@@ -32,6 +43,9 @@ namespace ClubHouse.Resources
     {
         ITaskResource Tasks(int id);
         ICommentResource Comments(int id);
+
+        Task<IReadOnlyList<Story>> Create(IEnumerable<Story> stories);
+        Task<IReadOnlyList<Story>> Update(IEnumerable<Story> stories);
 
     }
 }
