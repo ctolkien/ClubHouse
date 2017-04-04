@@ -1,6 +1,6 @@
 # ClubHouse
 
-This is a .NET Standard library for the [Clubhouse.io](https://clubhouse.io) API. 
+This is a .NET Standard 1.4 library for the [Clubhouse.io](https://clubhouse.io) API. 
 
 Non-blocking async turtles all the way down!
 
