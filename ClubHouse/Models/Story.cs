@@ -33,8 +33,6 @@ namespace ClubHouse.Models
         public DateTime UpdatedAt { get; set; }
         public int? WorkflowStateId { get; set; }
 
-
-
     }
     public enum StoryType
     {

@@ -30,15 +30,19 @@ namespace ClubHouse
             }
 
             var result = await base.SendAsync(request, cancellationToken);
-
-            switch (result.StatusCode)
+            if (!result.IsSuccessStatusCode)
             {
-                case System.Net.HttpStatusCode.BadRequest:
-                    throw new BadRequestException();
-                case System.Net.HttpStatusCode.NotFound:
-                    throw new NotFoundException();
-                case ((System.Net.HttpStatusCode)422):
-                    throw new UnprocessableException();
+                //let's try and decode the msg...
+                var msgResult = Newtonsoft.Json.JsonConvert.DeserializeObject<ClubHouseErrorResponse>(await result.Content.ReadAsStringAsync());
+                switch (result.StatusCode)
+                {
+                    case System.Net.HttpStatusCode.BadRequest:
+                        throw new BadRequestException(msgResult.ToString());
+                    case System.Net.HttpStatusCode.NotFound:
+                        throw new NotFoundException(msgResult.ToString());
+                    case ((System.Net.HttpStatusCode)422):
+                        throw new UnprocessableException(msgResult.ToString());
+                }
             }
 
             return result;
