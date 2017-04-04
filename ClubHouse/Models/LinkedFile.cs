@@ -2,6 +2,15 @@
 {
     public class LinkedFile : File
     {
-        public string Type { get; set; }
+        public LinkedFileType Type { get; set; }
+    }
+
+    public enum LinkedFileType
+    {
+        Google,
+        Url,
+        Dropbox,
+        Box,
+        Onedrive
     }
 }

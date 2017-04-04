@@ -8,7 +8,7 @@ namespace ClubHouse.Test
     public class UserTests
     {
         [Fact]
-        public async Task ListUsers()
+        public async Task List()
         {
             var client = CreateClient();
 

@@ -36,6 +36,8 @@ namespace ClubHouse
                 var msgResult = Newtonsoft.Json.JsonConvert.DeserializeObject<ClubHouseErrorResponse>(await result.Content.ReadAsStringAsync());
                 switch (result.StatusCode)
                 {
+                    case System.Net.HttpStatusCode.Unauthorized:
+                        throw new NotAuthorizedException(msgResult.ToString());
                     case System.Net.HttpStatusCode.BadRequest:
                         throw new BadRequestException(msgResult.ToString());
                     case System.Net.HttpStatusCode.NotFound:

@@ -2,7 +2,7 @@
 {
     public static class TestHelpers
     {
-        private const string apiKey = "replaceme";
+        private const string apiKey = "";
 
         public static ClubHouseClient CreateClient()
         {

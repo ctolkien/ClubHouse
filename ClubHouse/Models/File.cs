@@ -12,6 +12,7 @@ namespace ClubHouse.Models
         public string ThumbnailUrl { get; set; }
         public IList<string> MentionIds { get; set; }
         public string Description { get; set; }
+        [HideFromUpdate, HideFromCreate]
         public long Size { get; set; }
         [HideFromUpdate, HideFromCreate]
         public DateTime CreatedAt { get; set; }

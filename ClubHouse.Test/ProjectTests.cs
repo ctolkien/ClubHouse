@@ -12,11 +12,13 @@ namespace ClubHouse.Test
     {
 
         [Fact]
-        public async Task ListProjects()
+        public async Task List()
         {
             var client = CreateClient();
 
-            var foo = await client.Projects.List();
+            var result = await client.Projects.List();
+
+            Assert.Equal(1, result.Count);
         }
 
         [Fact]
@@ -24,9 +26,9 @@ namespace ClubHouse.Test
         {
             var client = CreateClient();
 
-            var foo = await client.Projects.Get(6);
+            var result = await client.Projects.Get(6);
 
-            Assert.Equal("iNemesis", foo.Name);
+            Assert.Equal("sample project", result.Name);
 
         }
 
