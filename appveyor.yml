@@ -3,10 +3,11 @@ version: 1.1.{build}
 configuration: Release
 init:
 - ps: |
-    if ($env:APPVEYOR_REPO_TAG -eq $true -and $env:APPVEYOR_REPO_TAG_NAME  -match "^v\d+\.\d+\.\d+$")
+    if ($env:APPVEYOR_REPO_TAG -eq $true -and $env:APPVEYOR_REPO_TAG_NAME  -match "^v\d+\.\d+\.\d+(-(?<prerelease>[\w\d]+))?$")
     {
         Write-Host "Tagged For Release: $($env:APPVEYOR_REPO_TAG_NAME)" -ForegroundColor Green
         $env:TaggedForRelease = $true
+        $env:TaggedForPreRelease = $matches.prerelease -ne $null
         Update-AppveyorBuild -Version "$env:APPVEYOR_REPO_TAG_NAME".Substring(1)
     }
 before_build:
@@ -26,11 +27,12 @@ deploy:
   skip_symbols: false
   artifact: /.*\.nupkg/
   on:
-    TaggedForRelease: "asd"
+    TaggedForRelease: true
+    TaggedForPreRelease : false
 
 - provider: GitHub
   release: $(APPVEYOR_REPO_TAG_NAME)
-  description: 'Release of $(appveyor_build_version)'
+  description: 'Release of $(APPVEYOR_REPO_TAG_NAME)'
   auth_token:
     secure: uLTEBGoagOuXDvbSbUqHe2k/7Oyk4lttpWKHBn4mRdSiZP6aCB9MMybins2dQLCZ
   artifact: /.*\.nupkg/            # upload all NuGet packages to release assets
