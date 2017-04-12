@@ -5,6 +5,7 @@ init:
 - ps: |
     if ($env:APPVEYOR_REPO_TAG -eq $true -and $env:APPVEYOR_REPO_TAG_NAME  -match "^\d+\.\d+\.\d+$")
     {
+        Write-Host "Tagged For Release: $($env:APPVEYOR_REPO_TAG_NAME)" -ForegroundColor Green
         $env:TaggedForRelease = $true
         Update-AppveyorBuild -Version "$env:APPVEYOR_REPO_TAG_NAME"
     }
@@ -24,5 +25,13 @@ deploy:
     secure: Gerln5x/jQ3CsCjXe76zQuP2Rjh12sKBH2wj88LIpt1IQym1+6MlFVWmvx5j+KSw
   skip_symbols: false
   artifact: /.*\.nupkg/
+  on:
+    TaggedForRelease: true
+deploy:
+  provider: GitHub
+  description: 'Release of $(appveyor_build_version)'
+  auth_token:
+    secure: uLTEBGoagOuXDvbSbUqHe2k/7Oyk4lttpWKHBn4mRdSiZP6aCB9MMybins2dQLCZ
+  artifact: /.*\.nupkg/            # upload all NuGet packages to release assets
   on:
     TaggedForRelease: true
