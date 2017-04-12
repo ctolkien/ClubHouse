@@ -27,7 +27,7 @@ deploy:
   artifact: /.*\.nupkg/
   on:
     TaggedForRelease: true
-deploy:
+
 - provider: GitHub
   description: 'Release of $(appveyor_build_version)'
   auth_token:
