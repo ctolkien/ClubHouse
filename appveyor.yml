@@ -4,7 +4,7 @@ configuration: Release
 build_script:
 - dotnet restore -v Minimal
 - dotnet build -c %CONFIGURATION%
-before_deploy:
+before_package:
 - dotnet pack -c %CONFIGURATION% .\ClubHouse\ClubHouse.csproj -o .\artifacts /p:Version %VERSION%
 test: off
 artifacts:
