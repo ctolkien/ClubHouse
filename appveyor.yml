@@ -3,17 +3,17 @@ version: 1.1.{build}
 configuration: Release
 init:
 - ps: |
-    if ($env:APPVEYOR_REPO_TAG -eq $true -and $env:APPVEYOR_REPO_TAG_NAME  -match "^\d+\.\d+\.\d+$")
+    if ($env:APPVEYOR_REPO_TAG -eq $true -and $env:APPVEYOR_REPO_TAG_NAME  -match "^v\d+\.\d+\.\d+$")
     {
         Write-Host "Tagged For Release: $($env:APPVEYOR_REPO_TAG_NAME)" -ForegroundColor Green
         $env:TaggedForRelease = $true
-        Update-AppveyorBuild -Version "$env:APPVEYOR_REPO_TAG_NAME"
+        Update-AppveyorBuild -Version "$env:APPVEYOR_REPO_TAG_NAME".Substring(1)
     }
 before_build:
 - dotnet --info
 - dotnet restore
 build_script:
-- dotnet build -c %CONFIGURATION%
+- dotnet build -c %CONFIGURATION% /p:Version=%APPVEYOR_BUILD_VERSION%
 after_build:
 - dotnet pack -c %CONFIGURATION% .\ClubHouse\ClubHouse.csproj -o .\artifacts
 test: off
@@ -29,6 +29,7 @@ deploy:
     TaggedForRelease: true
 
 - provider: GitHub
+  release: $env:APPVEYOR_REPO_TAG_NAME
   description: 'Release of $(appveyor_build_version)'
   auth_token:
     secure: uLTEBGoagOuXDvbSbUqHe2k/7Oyk4lttpWKHBn4mRdSiZP6aCB9MMybins2dQLCZ
