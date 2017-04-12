@@ -1,17 +1,11 @@
 os: Visual Studio 2017
 version: 1.0.{build}
 configuration: Release
-pull_requests:
-  do_not_increment_build_number: true
-environment:
-  ASPNETCORE_ENVIRONMENT: Development
-build:
-  verbosity: minimal
-  publish_nuget: true
 build_script:
 - dotnet restore -v Minimal
 - dotnet build -c %CONFIGURATION%
-- dotnet pack -c %CONFIGURATION% .\ClubHouse\ClubHouse.csproj -o .\artifacts 
+before_deploy:
+- dotnet pack -c %CONFIGURATION% .\ClubHouse\ClubHouse.csproj -o .\artifacts /p:Version %VERSION%
 test: off
 artifacts:
 - path: .\ClubHouse\artifacts\**\*.*
