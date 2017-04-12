@@ -67,7 +67,7 @@ namespace ClubHouse.Resources
             return await Create<TOutput>(collectionWrapped, ResourceUrl(bulk: true));
         }
 
-        private async Task<TOutput> Create<TOutput>(object model, string resourceUrl)
+        protected async Task<TOutput> Create<TOutput>(object model, string resourceUrl)
         {
             var serialized = JsonConvert.SerializeObject(model, DefaultCreateSettings);
             var httpConent = new System.Net.Http.StringContent(serialized);
@@ -91,7 +91,7 @@ namespace ClubHouse.Resources
             return await Update<TOutput>(model, ResourceUrl(bulk: true));
         }
 
-        private async Task<TOutput> Update<TOutput>(object model, string resourceUrl)
+        protected async Task<TOutput> Update<TOutput>(object model, string resourceUrl)
         {
             var serialized = JsonConvert.SerializeObject(model, DefaultUpdateSettings);
             var httpConent = new System.Net.Http.StringContent(serialized);

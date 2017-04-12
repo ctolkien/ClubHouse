@@ -33,6 +33,13 @@ namespace ClubHouse.Resources
             return await base.Update<Story, IReadOnlyList<Story>>(stories);
         }
 
+        public async Task<IReadOnlyList<Story>> Search(StorySearch search)
+        {
+            //Note, that we use create here, as it under the covers is a 'post'
+            //this should probably be exposed a bit better from the base class.
+            return await Create<IReadOnlyList<Story>>(search, "stories/search");
+        }
+
     }
 
     public interface IStoryResource :
@@ -46,6 +53,7 @@ namespace ClubHouse.Resources
 
         Task<IReadOnlyList<Story>> Create(IEnumerable<Story> stories);
         Task<IReadOnlyList<Story>> Update(IEnumerable<Story> stories);
+        Task<IReadOnlyList<Story>> Search(StorySearch search);
 
     }
 }

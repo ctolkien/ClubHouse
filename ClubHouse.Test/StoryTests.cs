@@ -23,5 +23,21 @@ namespace ClubHouse.Test
             Assert.Equal(2, result.Count);
 
         }
+
+        [Fact]
+        public async Task StorySearch()
+        {
+            var client = CreateClient();
+
+            var search = new StorySearch
+            {
+                LabelName = "This is my test label #2"
+            };
+
+            var result = await client.Stories.Search(search);
+
+            Assert.Equal(2, result.Count);
+
+        }
     }
 }
