@@ -1,15 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.10
+VisualStudioVersion = 15.0.26403.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubHouse", "ClubHouse\ClubHouse.csproj", "{4AE41222-829A-47D2-B23E-621EE45AFBC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClubHouse", "ClubHouse\ClubHouse.csproj", "{4AE41222-829A-47D2-B23E-621EE45AFBC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubHouse.Test", "ClubHouse.Test\ClubHouse.Test.csproj", "{E4ABFEEF-3BC8-48C5-8624-E8D02EF0476F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClubHouse.Test", "ClubHouse.Test\ClubHouse.Test.csproj", "{E4ABFEEF-3BC8-48C5-8624-E8D02EF0476F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9DE5FAF5-3F79-45B2-89DB-B3D5E41AE285}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		.travis.yml = .travis.yml
+		appveyor.yml = appveyor.yml
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
