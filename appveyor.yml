@@ -1,10 +1,17 @@
 os: Visual Studio 2017
 version: 1.1.{build}
 configuration: Release
+init:
+- ps: |
+    if ($env:APPVEYOR_REPO_TAG -eq $true -and $env:APPVEYOR_REPO_TAG_NAME  -match "^\d+\.\d+\.\d+$")
+    {
+        $env:TaggedForRelease = $true
+        Update-AppveyorBuild -Version "$env:APPVEYOR_REPO_TAG_NAME"
+    }
 before_build:
 - dotnet --info
+- dotnet restore
 build_script:
-- dotnet restore -v Minimal
 - dotnet build -c %CONFIGURATION%
 after_build:
 - dotnet pack -c %CONFIGURATION% .\ClubHouse\ClubHouse.csproj -o .\artifacts
@@ -18,4 +25,4 @@ deploy:
   skip_symbols: false
   artifact: /.*\.nupkg/
   on:
-    branch: release
+    TaggedForRelease: true
