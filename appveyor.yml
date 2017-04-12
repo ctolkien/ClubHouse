@@ -28,7 +28,7 @@ deploy:
   on:
     TaggedForRelease: true
 deploy:
-  provider: GitHub
+- provider: GitHub
   description: 'Release of $(appveyor_build_version)'
   auth_token:
     secure: uLTEBGoagOuXDvbSbUqHe2k/7Oyk4lttpWKHBn4mRdSiZP6aCB9MMybins2dQLCZ
