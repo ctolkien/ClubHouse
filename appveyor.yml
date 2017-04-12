@@ -7,7 +7,7 @@ build_script:
 - dotnet restore -v Minimal
 - dotnet build -c %CONFIGURATION%
 after_build:
-- dotnet pack -c %CONFIGURATION% .\ClubHouse\ClubHouse.csproj -o .\artifacts /p:Version=1.2.3
+- dotnet pack -c %CONFIGURATION% .\ClubHouse\ClubHouse.csproj -o .\artifacts /p:Version={version}
 test: off
 artifacts:
 - path: .\ClubHouse\artifacts\**\*.*
