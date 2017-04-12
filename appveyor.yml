@@ -1,5 +1,5 @@
 os: Visual Studio 2017
-version: 1.0.{build}
+version: 1.1.{build}
 configuration: Release
 before_build:
 - dotnet --info
@@ -7,7 +7,7 @@ build_script:
 - dotnet restore -v Minimal
 - dotnet build -c %CONFIGURATION%
 after_build:
-- dotnet pack -c %CONFIGURATION% .\ClubHouse\ClubHouse.csproj -o .\artifacts /p:Version=%APPVEYOR_BUILD_VERSION%
+- dotnet pack -c %CONFIGURATION% .\ClubHouse\ClubHouse.csproj -o .\artifacts
 test: off
 artifacts:
 - path: .\ClubHouse\artifacts\**\*.*
