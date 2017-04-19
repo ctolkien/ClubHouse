@@ -57,4 +57,5 @@ after_deploy:
     | ? { $_.tag -Match $env:RELEASEREGEX -and $_.status -eq "success" } | sort finished -desc | select -first 1
     $startSha = $latestBuild.commitId
     $endSha = $env:APPVEYOR_REPO_COMMIT
-    Write-Host git log ($startSha + ".." + $endSha) --oneline
+    $result = git log ($startSha + ".." + $endSha) --oneline
+    Write-Host $result
