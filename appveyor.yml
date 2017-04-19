@@ -6,7 +6,7 @@ environment:
   DOTNET_CLI_TELEMETRY_OPTOUT: 1
 init:
 - ps: |
-    if ($env:APPVEYOR_REPO_TAG -eq $true -and $env:APPVEYOR_REPO_TAG_NAME  -match $env:RELEASEREGEX)
+    if ($env:APPVEYOR_REPO_TAG -eq $true -and $env:APPVEYOR_REPO_TAG_NAME  -match "^v\d+\.\d+\.\d+(-(?<prerelease>[\w\d]+))?$")
     {
         $env:TaggedForRelease = $true
         $env:TaggedForPreRelease = $matches.prerelease -ne $null
