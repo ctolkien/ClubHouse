@@ -5,9 +5,15 @@ init:
 - ps: |
     if ($env:APPVEYOR_REPO_TAG -eq $true -and $env:APPVEYOR_REPO_TAG_NAME  -match "^v\d+\.\d+\.\d+(-(?<prerelease>[\w\d]+))?$")
     {
-        Write-Host "Tagged For Release: $($env:APPVEYOR_REPO_TAG_NAME)" -ForegroundColor Green
+        
         $env:TaggedForRelease = $true
         $env:TaggedForPreRelease = $matches.prerelease -ne $null
+        if ($env:TaggedForPreRelease) {
+            Add-AppveyorMessage "Tagged For PreRelease: $($env:APPVEYOR_REPO_TAG_NAME)" -details $env:APPVEYOR_REPO_COMMIT
+        }
+        else {
+            Add-AppveyorMessage "Tagged For Release: $($env:APPVEYOR_REPO_TAG_NAME)" -details $env:APPVEYOR_REPO_COMMIT
+        }
         Update-AppveyorBuild -Version "$env:APPVEYOR_REPO_TAG_NAME".Substring(1)
     }
 before_build:
@@ -32,6 +38,7 @@ deploy:
 
 - provider: GitHub
   release: $(APPVEYOR_REPO_TAG_NAME)
+  draft: $(TaggedForPreRelease)
   description: 'Release of $(APPVEYOR_REPO_TAG_NAME)'
   auth_token:
     secure: uLTEBGoagOuXDvbSbUqHe2k/7Oyk4lttpWKHBn4mRdSiZP6aCB9MMybins2dQLCZ
