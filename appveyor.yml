@@ -54,5 +54,6 @@ after_deploy:
       "Authorization" = "Bearer $token"
       "Content-type" = "application/json"
     }
-    (invoke-webrequest https://ci.appveyor.com/api/projects/Soda-Digital/clubhouse/history?recordsNumber=100 -Headers $headers).builds `
+    $latestBuild = (invoke-resetmethod https://ci.appveyor.com/api/projects/Soda-Digital/clubhouse/history?recordsNumber=100 -Headers $headers).builds 
     | ? tag -Match $env:RELEASEREGEX | sort finished -desc | select -first 1
+    Write-Host $latestBuild
