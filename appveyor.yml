@@ -4,9 +4,6 @@ configuration: Release
 environment:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
   DOTNET_CLI_TELEMETRY_OPTOUT: 1
-  AVAPIKEY:
-    secure: BGmpOSSetJe8WsYsYM3zkm+fXVh2YDsJ1lyQiTeuOdQ=
-  RELEASEREGEX: ^v\d+\.\d+\.\d+(-(?<prerelease>[\w\d]+))?$
 init:
 - ps: |
     if ($env:APPVEYOR_REPO_TAG -eq $true -and $env:APPVEYOR_REPO_TAG_NAME  -match $env:RELEASEREGEX)
@@ -44,18 +41,5 @@ deploy:
   auth_token:
     secure: uLTEBGoagOuXDvbSbUqHe2k/7Oyk4lttpWKHBn4mRdSiZP6aCB9MMybins2dQLCZ
   artifact: /.*\.nupkg/ # upload all NuGet packages to release assets
-#  on:
-#    TaggedForRelease: true
-after_deploy:
-- ps: | 
-    $token = $env:AVAPIKEY
-    $headers = @{
-      "Authorization" = "Bearer $token"
-      "Content-type" = "application/json"
-    }
-    $latestBuild = (invoke-restmethod https://ci.appveyor.com/api/projects/Soda-Digital/clubhouse/history?recordsNumber=100 -Headers $headers).builds `
-    | ? { $_.tag -Match $env:RELEASEREGEX -and $_.status -eq "success" } | sort finished -desc | select -first 1
-    $startSha = $latestBuild.commitId
-    $endSha = $env:APPVEYOR_REPO_COMMIT
-    $result = git log ($startSha + ".." + $endSha) --oneline
-    Write-Host $result
+  on:
+    TaggedForRelease: true
