@@ -3,7 +3,9 @@ using System.Collections.Generic;
 
 namespace ClubHouse.Models
 {
-
+    /// <summary>
+    /// A Clubhouse User
+    /// </summary>
     public class User : ClubHouseModel<string>
     {
         public bool TwoFactorAuthActivated { get; set; }
@@ -13,6 +15,9 @@ namespace ClubHouse.Models
         public string Username { get; set; }
     }
 
+    /// <summary>
+    /// The permissions of a Clubhouse <see cref="User"/>
+    /// </summary>
     public class Permission : ClubHouseModel<string>
     {
         public string Initials { get; set; }

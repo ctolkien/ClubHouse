@@ -3,6 +3,10 @@ using System.Collections.Generic;
 
 namespace ClubHouse.Models
 {
+    /// <summary>
+    /// Populate this object with search terms used to search on a <see cref="Story"/>.
+    /// <para>See also <seealso cref="Resources.IStoryResource.Search(StorySearch)"/></para>
+    /// </summary>
     public class StorySearch
     {
         public IList<int> ProjectIds { get; set; }

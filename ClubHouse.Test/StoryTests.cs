@@ -28,7 +28,6 @@ namespace ClubHouse.Test
         public async Task StorySearch()
         {
             var client = CreateClient();
-
             var search = new StorySearch
             {
                 LabelName = "This is my test label #2"

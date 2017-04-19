@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace ClubHouse.Models
 {
+    /// <summary>
+    /// A Clubhouse Workflow
+    /// </summary>
     public class Workflow : ClubHouseModel<int>
     {
         public DateTime CreatedAt { get; set; }

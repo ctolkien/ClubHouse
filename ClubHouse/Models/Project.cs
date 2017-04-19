@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace ClubHouse.Models
 {
+    /// <summary>
+    /// A Clubhouse Project
+    /// </summary>
     public class Project : ClubHouseModel<int>
     {
         [HideFromUpdate, HideFromCreate]

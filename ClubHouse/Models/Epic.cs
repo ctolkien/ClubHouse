@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace ClubHouse.Models
 {
+    /// <summary>
+    /// A Clubhouse Epic
+    /// </summary>
     public class Epic : ClubHouseModel<int>
     {
         public IList<string> FollowerIds { get; set; }

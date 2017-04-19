@@ -29,7 +29,9 @@ namespace ClubHouse
                 request.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
             }
 
+            //perform the request
             var result = await base.SendAsync(request, cancellationToken);
+
             if (!result.IsSuccessStatusCode)
             {
                 //let's try and decode the msg...

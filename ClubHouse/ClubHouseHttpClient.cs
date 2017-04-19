@@ -3,7 +3,7 @@ using System.Net.Http;
 
 namespace ClubHouse
 {
-    public class ClubHouseHttpClient : HttpClient
+    internal class ClubHouseHttpClient : HttpClient
     {
         internal ClubHouseHttpClient(string apiToken, string endPoint) :
             this(apiToken, endPoint, new ClubHouseHttpMessageHandler(apiToken))

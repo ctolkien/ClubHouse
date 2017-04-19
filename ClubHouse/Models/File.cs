@@ -4,7 +4,9 @@ using System.Collections.Generic;
 
 namespace ClubHouse.Models
 {
-
+    /// <summary>
+    /// A Clubhouse File
+    /// </summary>
     public class File : ClubHouseModel<int>
     {
         public string UploaderId { get; set; }

@@ -4,6 +4,10 @@ using System.Collections.Generic;
 
 namespace ClubHouse.Models
 {
+    /// <summary>
+    /// A <see cref="Comment"/> on a Clubhouse resource.
+    /// Comments can also have child comments.
+    /// </summary>
     public class Comment : ClubHouseModel<int>
     {
         public string AuthorId { get; set; }
@@ -13,6 +17,9 @@ namespace ClubHouse.Models
         public DateTime UpdatedAt { get; set; }
         public string Text { get; set; }
         public bool Deleted { get; set; }
+        /// <summary>
+        /// A collection of child comments.
+        /// </summary>
         public IReadOnlyList<Comment> Comments { get; set; }
     }
 }

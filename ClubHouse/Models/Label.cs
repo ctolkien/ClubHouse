@@ -3,6 +3,9 @@ using System;
 
 namespace ClubHouse.Models
 {
+    /// <summary>
+    /// A Clubhouse Label
+    /// </summary>
     public class Label : ClubHouseModel<int>
     {
         [HideFromUpdate, HideFromCreate]
@@ -13,6 +16,9 @@ namespace ClubHouse.Models
 
     }
 
+    /// <summary>
+    /// A Clubhouse Label including details about it's usage.
+    /// </summary>
     public class LabelWithCounts : Label
     {
         [HideFromUpdate, HideFromCreate]

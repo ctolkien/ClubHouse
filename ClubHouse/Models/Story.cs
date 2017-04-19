@@ -1,10 +1,12 @@
 ﻿using ClubHouse.Serialization;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 
 namespace ClubHouse.Models
 {
+    /// <summary>
+    /// A Clubhouse story
+    /// </summary>
     public class Story : ClubHouseModel<int>
     {
         public IList<string> FollowerIds { get; set; }
