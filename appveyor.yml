@@ -47,7 +47,6 @@ deploy:
   artifact: /.*\.nupkg/ # upload all NuGet packages to release assets
   on:
     TaggedForRelease: true
-    Blargh: true
 after_deploy:
 - ps: | 
     $token = $env:AVAPIKEY
