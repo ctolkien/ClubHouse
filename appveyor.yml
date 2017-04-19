@@ -1,19 +1,17 @@
 os: Visual Studio 2017
 version: 1.1.{build}
 configuration: Release
+environment:
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+  DOTNET_CLI_TELEMETRY_OPTOUT: 1
 init:
 - ps: |
     if ($env:APPVEYOR_REPO_TAG -eq $true -and $env:APPVEYOR_REPO_TAG_NAME  -match "^v\d+\.\d+\.\d+(-(?<prerelease>[\w\d]+))?$")
     {
-        
         $env:TaggedForRelease = $true
         $env:TaggedForPreRelease = $matches.prerelease -ne $null
-        if ($env:TaggedForPreRelease) {
-            Add-AppveyorMessage "Tagged For PreRelease: $($env:APPVEYOR_REPO_TAG_NAME)" -details $env:APPVEYOR_REPO_COMMIT
-        }
-        else {
-            Add-AppveyorMessage "Tagged For Release: $($env:APPVEYOR_REPO_TAG_NAME)" -details $env:APPVEYOR_REPO_COMMIT
-        }
+        $relName = if ($env:TaggedForPreRelease) { "PreRelease" } else { "Release" }
+        Add-AppveyorMessage "Tagged For $relName: $($env:APPVEYOR_REPO_TAG_NAME)" -details $env:APPVEYOR_REPO_COMMIT
         Update-AppveyorBuild -Version "$env:APPVEYOR_REPO_TAG_NAME".Substring(1)
     }
 before_build:
@@ -38,10 +36,10 @@ deploy:
 
 - provider: GitHub
   release: $(APPVEYOR_REPO_TAG_NAME)
-  draft: $(TaggedForPreRelease)
+  prerelease: $(TaggedForPreRelease)
   description: 'Release of $(APPVEYOR_REPO_TAG_NAME)'
   auth_token:
     secure: uLTEBGoagOuXDvbSbUqHe2k/7Oyk4lttpWKHBn4mRdSiZP6aCB9MMybins2dQLCZ
-  artifact: /.*\.nupkg/            # upload all NuGet packages to release assets
+  artifact: /.*\.nupkg/ # upload all NuGet packages to release assets
   on:
     TaggedForRelease: true
