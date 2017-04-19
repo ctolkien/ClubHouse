@@ -36,7 +36,6 @@ deploy:
   on:
     TaggedForRelease: true
     TaggedForPreRelease : false
-    Blargh: true
 
 - provider: GitHub
   release: $(APPVEYOR_REPO_TAG_NAME)
@@ -45,8 +44,8 @@ deploy:
   auth_token:
     secure: uLTEBGoagOuXDvbSbUqHe2k/7Oyk4lttpWKHBn4mRdSiZP6aCB9MMybins2dQLCZ
   artifact: /.*\.nupkg/ # upload all NuGet packages to release assets
-  on:
-    TaggedForRelease: true
+#  on:
+#    TaggedForRelease: true
 after_deploy:
 - ps: | 
     $token = $env:AVAPIKEY
@@ -55,5 +54,7 @@ after_deploy:
       "Content-type" = "application/json"
     }
     $latestBuild = (invoke-restmethod https://ci.appveyor.com/api/projects/Soda-Digital/clubhouse/history?recordsNumber=100 -Headers $headers).builds `
-    | ? tag -Match $env:RELEASEREGEX | sort finished -desc | select -first 1
-    Write-Host $latestBuild
+    | ? { $_.tag -Match $env:RELEASEREGEX -and $_.status -eq "success" } | sort finished -desc | select -first 1
+    $startSha = $latestBuild.commitId
+    $endSha = $env:APPVEYOR_REPO_COMMIT
+    Write-Host git log ($startSha + ".." + $endSha) --oneline
