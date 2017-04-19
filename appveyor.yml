@@ -11,7 +11,7 @@ init:
         $env:TaggedForRelease = $true
         $env:TaggedForPreRelease = $matches.prerelease -ne $null
         $relName = if ($env:TaggedForPreRelease) { "PreRelease" } else { "Release" }
-        Add-AppveyorMessage "Tagged For $relName: $($env:APPVEYOR_REPO_TAG_NAME)" -details $env:APPVEYOR_REPO_COMMIT
+        Add-AppveyorMessage "Tagged For $($relName): $($env:APPVEYOR_REPO_TAG_NAME)" -details $env:APPVEYOR_REPO_COMMIT
         Update-AppveyorBuild -Version "$env:APPVEYOR_REPO_TAG_NAME".Substring(1)
     }
 before_build:
