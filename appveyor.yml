@@ -4,9 +4,12 @@ configuration: Release
 environment:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
   DOTNET_CLI_TELEMETRY_OPTOUT: 1
+  AVAPIKEY:
+    secure: BGmpOSSetJe8WsYsYM3zkm+fXVh2YDsJ1lyQiTeuOdQ=
+  RELEASEREGEX: ^v\d+\.\d+\.\d+(-(?<prerelease>[\w\d]+))?$
 init:
 - ps: |
-    if ($env:APPVEYOR_REPO_TAG -eq $true -and $env:APPVEYOR_REPO_TAG_NAME  -match "^v\d+\.\d+\.\d+(-(?<prerelease>[\w\d]+))?$")
+    if ($env:APPVEYOR_REPO_TAG -eq $true -and $env:APPVEYOR_REPO_TAG_NAME  -match $env:RELEASEREGEX)
     {
         $env:TaggedForRelease = $true
         $env:TaggedForPreRelease = $matches.prerelease -ne $null
@@ -33,6 +36,7 @@ deploy:
   on:
     TaggedForRelease: true
     TaggedForPreRelease : false
+    Blargh: true
 
 - provider: GitHub
   release: $(APPVEYOR_REPO_TAG_NAME)
@@ -43,3 +47,13 @@ deploy:
   artifact: /.*\.nupkg/ # upload all NuGet packages to release assets
   on:
     TaggedForRelease: true
+    Blargh: true
+after_deploy:
+- ps: | 
+    $token = $env:AVAPIKEY
+    $headers = @{
+      "Authorization" = "Bearer $token"
+      "Content-type" = "application/json"
+    }
+    (invoke-webrequest https://ci.appveyor.com/api/projects/Soda-Digital/clubhouse/history?recordsNumber=100 -Headers $headers).builds `
+    | ? tag -Match $env:RELEASEREGEX | sort finished -desc | select -first 1
