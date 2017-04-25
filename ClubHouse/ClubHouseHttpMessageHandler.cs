@@ -10,26 +10,27 @@ namespace ClubHouse
 {
     internal class ClubHouseHttpMessageHandler : DelegatingHandler
     {
-        private readonly string _apiToken;
+        private readonly Func<string> _apiToken;
 
-        public ClubHouseHttpMessageHandler(string apiToken) : base(new HttpClientHandler())
+        public ClubHouseHttpMessageHandler(Func<string> apiToken) : base(new HttpClientHandler())
         {
             _apiToken = apiToken;
         }
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
+            var token = _apiToken();
             var builder = new UriBuilder(request.RequestUri);
             //This is ugly as sin, but is the method outlined here:
             //https://msdn.microsoft.com/en-us/library/system.uribuilder.query(v=vs.110).aspx
             if (builder.Query?.Length > 1)
             {
-                builder.Query = builder.Query.Substring(1) + $"&token={_apiToken}";
+                builder.Query = builder.Query.Substring(1) + $"&token={token}";
             }
             else
             {
-                builder.Query = $"?token={_apiToken}";
+                builder.Query = $"?token={token}";
             }
-            
+
             request.RequestUri = builder.Uri;
 
             if (request.Method == HttpMethod.Post || request.Method == HttpMethod.Put)
@@ -39,7 +40,7 @@ namespace ClubHouse
 
             //perform the request
             var result = await base.SendAsync(request, cancellationToken);
-            
+
             //now we deal with the result
             if (!result.IsSuccessStatusCode)
             {

@@ -21,19 +21,43 @@ namespace ClubHouse
         /// The API token used to access the Clubhouse API.
         /// All actions will be performed on behalf of the user that generated this token.
         /// </param>
-        public ClubHouseClient(string apiToken) : this(apiToken, new ClubHouseHttpMessageHandler(apiToken))
-        {
-        }
-
-        //This constructure is used for testing only - allows you to inject your own message handler
-        internal ClubHouseClient(string apiToken, HttpMessageHandler messageHandler)
+        public ClubHouseClient(string apiToken) : this(new ClubHouseHttpMessageHandler(() => apiToken))
         {
             if (string.IsNullOrEmpty(apiToken))
             {
                 throw new ArgumentNullException(nameof(apiToken));
             }
+        }
 
-            HttpClient = new ClubHouseHttpClient(apiToken, EndPoint, messageHandler);
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ClubHouseClient"/> class.
+        /// </summary>
+        /// <param name="apiToken">
+        /// The API token used to access the Clubhouse API.
+        /// This overload allows you to supply a Func which can use different API tokens
+        /// whilst reusing the same HttpClient
+        /// </param>
+        public ClubHouseClient(Func<string> apiToken) : this(new ClubHouseHttpMessageHandler(apiToken))
+        {
+            if (apiToken == null)
+            {
+                throw new ArgumentNullException(nameof(apiToken));
+            }
+        }
+
+
+        /// <summary>
+        /// This constructure is used for testing only - allows you to inject your own message handler
+        /// </summary>
+        /// <param name="messageHandler"></param>
+        internal ClubHouseClient(HttpMessageHandler messageHandler)
+        {
+            if (messageHandler == null)
+            {
+                throw new ArgumentNullException(nameof(messageHandler));
+            }
+
+            HttpClient = new ClubHouseHttpClient(EndPoint, messageHandler);
 
             Epics = new EpicResource(HttpClient);
             Files = new FileResource(HttpClient);
