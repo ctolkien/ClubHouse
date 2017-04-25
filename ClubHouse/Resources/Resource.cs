@@ -3,19 +3,20 @@ using ClubHouse.Serialization;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Net.Http;
 
 namespace ClubHouse.Resources
 {
     internal abstract class Resource<TModel, TKey> where TModel: ClubHouseModel<TKey>
     {
-        protected readonly ClubHouseHttpClient _client;
+        protected readonly HttpClient _client;
         protected abstract string ResourceName { get; }
 
         protected static JsonSerializerSettings DefaultUpdateSettings = new UpdateSerializerSettings();
         protected static JsonSerializerSettings DefaultCreateSettings = new CreateSerializerSettings();
         protected static JsonSerializerSettings DefaultSettings = new DefaultSerializerSettings();
 
-        internal Resource(ClubHouseHttpClient client)
+        internal Resource(HttpClient client)
         {
             _client = client;
         }

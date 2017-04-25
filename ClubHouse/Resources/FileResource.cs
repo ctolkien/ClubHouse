@@ -1,11 +1,12 @@
-﻿using ClubHouse.Models;
+﻿using System.Net.Http;
+using ClubHouse.Models;
 
 namespace ClubHouse.Resources
 {
     internal class FileResource : Resource<File, int>, IFileResource
     {
         protected override string ResourceName => "files";
-        internal FileResource(ClubHouseHttpClient client) : base(client)
+        internal FileResource(HttpClient client) : base(client)
         {
         }
 

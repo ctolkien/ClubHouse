@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System;
 using System.Threading.Tasks;
+using System.Net.Http;
 
 namespace ClubHouse.Resources
 {
@@ -9,7 +10,7 @@ namespace ClubHouse.Resources
     {
         protected override string ResourceName => "stories";
 
-        internal StoryResource(ClubHouseHttpClient client) : base(client)
+        internal StoryResource(HttpClient client) : base(client)
         {
         }
 

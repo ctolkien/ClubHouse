@@ -1,11 +1,12 @@
-﻿using ClubHouse.Models;
+﻿using System.Net.Http;
+using ClubHouse.Models;
 
 namespace ClubHouse.Resources
 {
     internal class WorkflowResource : Resource<Workflow, int>, IWorkflowResource
     {
         protected override string ResourceName => "workflows";
-        internal WorkflowResource(ClubHouseHttpClient client) : base(client)
+        internal WorkflowResource(HttpClient client) : base(client)
         {
         }
     }

@@ -1,6 +1,8 @@
 ﻿using ClubHouse.Exceptions;
 using System;
+using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -16,35 +18,42 @@ namespace ClubHouse
         }
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            var builder = new UriBuilder(request.RequestUri)
+            var builder = new UriBuilder(request.RequestUri);
+            //This is ugly as sin, but is the method outlined here:
+            //https://msdn.microsoft.com/en-us/library/system.uribuilder.query(v=vs.110).aspx
+            if (builder.Query?.Length > 1)
             {
-                //TODO: Find a less stringy way of doing this...
-                Query = $"?token={_apiToken}"
-            };
+                builder.Query = builder.Query.Substring(1) + $"&token={_apiToken}";
+            }
+            else
+            {
+                builder.Query = $"?token={_apiToken}";
+            }
+            
             request.RequestUri = builder.Uri;
 
-            //todo find a better way to filter this based on requests which can have a body...
-            if (request.Content != null)
+            if (request.Method == HttpMethod.Post || request.Method == HttpMethod.Put)
             {
-                request.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+                request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             }
 
             //perform the request
             var result = await base.SendAsync(request, cancellationToken);
-
+            
+            //now we deal with the result
             if (!result.IsSuccessStatusCode)
             {
                 //let's try and decode the msg...
                 var msgResult = Newtonsoft.Json.JsonConvert.DeserializeObject<ClubHouseErrorResponse>(await result.Content.ReadAsStringAsync());
                 switch (result.StatusCode)
                 {
-                    case System.Net.HttpStatusCode.Unauthorized:
+                    case HttpStatusCode.Unauthorized:
                         throw new NotAuthorizedException(msgResult.ToString());
-                    case System.Net.HttpStatusCode.BadRequest:
+                    case HttpStatusCode.BadRequest:
                         throw new BadRequestException(msgResult.ToString());
-                    case System.Net.HttpStatusCode.NotFound:
+                    case HttpStatusCode.NotFound:
                         throw new NotFoundException(msgResult.ToString());
-                    case ((System.Net.HttpStatusCode)422):
+                    case ((HttpStatusCode)422):
                         throw new UnprocessableException(msgResult.ToString());
                 }
             }

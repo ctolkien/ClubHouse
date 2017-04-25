@@ -1,11 +1,12 @@
-﻿using ClubHouse.Models;
+﻿using System.Net.Http;
+using ClubHouse.Models;
 
 namespace ClubHouse.Resources
 {
     internal class UserResource : Resource<User, string>, IUserResource
     {
         protected override string ResourceName => "users";
-        internal UserResource(ClubHouseHttpClient client) : base(client)
+        internal UserResource(HttpClient client) : base(client)
         {
         }
     }

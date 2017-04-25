@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 using ClubHouse.Models;
 using Newtonsoft.Json;
@@ -10,10 +11,9 @@ namespace ClubHouse.Resources
     {
         protected override string ResourceName => "projects";
 
-        internal ProjectResource(ClubHouseHttpClient client) : base(client)
+        internal ProjectResource(HttpClient client) : base(client)
         {
         }
-
 
         public async Task<IReadOnlyList<Story>> ListStories(int id)
         {
@@ -22,7 +22,6 @@ namespace ClubHouse.Resources
 
             return JsonConvert.DeserializeObject<IReadOnlyList<Story>>(content, DefaultSettings);
         }
-
     }
 
     public interface IProjectResource :

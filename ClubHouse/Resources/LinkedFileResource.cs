@@ -1,11 +1,12 @@
-﻿using ClubHouse.Models;
+﻿using System.Net.Http;
+using ClubHouse.Models;
 
 namespace ClubHouse.Resources
 {
     internal class LinkedFileResource : Resource<LinkedFile, int>, ILinkedFileResource
     {
         protected override string ResourceName => "linked-files";
-        internal LinkedFileResource(ClubHouseHttpClient client) : base(client)
+        internal LinkedFileResource(HttpClient client) : base(client)
         {
         }
     }

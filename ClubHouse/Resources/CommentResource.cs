@@ -1,4 +1,5 @@
-﻿using ClubHouse.Models;
+﻿using System.Net.Http;
+using ClubHouse.Models;
 
 namespace ClubHouse.Resources
 {
@@ -7,11 +8,10 @@ namespace ClubHouse.Resources
         private readonly int _storyId;
 
         protected override string ResourceName => $"{_storyId}/comments";
-        internal CommentResource(int storyId, ClubHouseHttpClient client) : base(client)
+        internal CommentResource(int storyId, HttpClient client) : base(client)
         {
             _storyId = storyId;
         }
-
     }
 
     public interface ICommentResource :

@@ -1,5 +1,6 @@
 ﻿using ClubHouse.Models;
 using System.Threading.Tasks;
+using System.Net.Http;
 
 namespace ClubHouse.Resources
 {
@@ -7,7 +8,7 @@ namespace ClubHouse.Resources
     {
         protected override string ResourceName => "epics";
 
-        internal EpicResource(ClubHouseHttpClient client) : base(client)
+        internal EpicResource(HttpClient client) : base(client)
         {
         }
 

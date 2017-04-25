@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net.Http;
+using System.Threading.Tasks;
 using ClubHouse.Models;
 
 namespace ClubHouse.Resources
@@ -7,7 +8,7 @@ namespace ClubHouse.Resources
     {
         protected override string ResourceName => "labels";
 
-        internal LabelResource(ClubHouseHttpClient client) : base(client)
+        internal LabelResource(HttpClient client) : base(client)
         {
         }
 

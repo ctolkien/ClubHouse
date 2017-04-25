@@ -12,7 +12,7 @@ namespace ClubHouse
     public class ClubHouseClient : IDisposable
     {
         const string EndPoint = "https://api.clubhouse.io/api/v1/";
-        internal ClubHouseHttpClient HttpClient;
+        internal HttpClient HttpClient;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ClubHouseClient"/> class.
@@ -44,7 +44,6 @@ namespace ClubHouse
             Stories = new StoryResource(HttpClient);
             Users = new UserResource(HttpClient);
             Workflows = new WorkflowResource(HttpClient);
-
         }
 
         /// <summary>

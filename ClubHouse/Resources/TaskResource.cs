@@ -1,4 +1,5 @@
-﻿using ClubHouse.Models;
+﻿using System.Net.Http;
+using ClubHouse.Models;
 
 namespace ClubHouse.Resources
 {
@@ -7,7 +8,7 @@ namespace ClubHouse.Resources
         protected override string ResourceName => $"{_storyId}/tasks";
         private int _storyId;
 
-        internal TaskResource(int storyId, ClubHouseHttpClient client) : base(client)
+        internal TaskResource(int storyId, HttpClient client) : base(client)
         {
             _storyId = storyId;
         }
