@@ -20,7 +20,7 @@ before_build:
 build_script:
 - dotnet build -c %CONFIGURATION% /p:Version=%APPVEYOR_BUILD_VERSION%
 after_build:
-- dotnet pack -c %CONFIGURATION% .\ClubHouse\ClubHouse.csproj -o .\artifacts /p:Version=%APPVEYOR_BUILD_VERSION%
+- dotnet pack -c %CONFIGURATION% .\ClubHouse\ClubHouse.csproj -o .\artifacts /p:Version=%APPVEYOR_BUILD_VERSION% --no-build
 test: off
 artifacts:
 - path: .\ClubHouse\artifacts\**\*.*
