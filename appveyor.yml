@@ -21,6 +21,7 @@ build_script:
 - dotnet build -c %CONFIGURATION% /p:Version=%APPVEYOR_BUILD_VERSION%
 after_build:
 - dotnet pack -c %CONFIGURATION% .\ClubHouse\ClubHouse.csproj -o .\artifacts /p:Version=%APPVEYOR_BUILD_VERSION% --no-build
+- appveyor PushArtifact .\ClubHouse\artifacts\**\*.*
 test: off
 artifacts:
 - path: .\ClubHouse\artifacts\**\*.*
