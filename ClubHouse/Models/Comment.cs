@@ -16,6 +16,7 @@ namespace ClubHouse.Models
         [HideFromCreate]
         public DateTime UpdatedAt { get; set; }
         public string Text { get; set; }
+        [HideFromCreate]
         public bool Deleted { get; set; }
         /// <summary>
         /// A collection of child comments.
