@@ -1,6 +1,7 @@
 ﻿using ClubHouse.Serialization;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace ClubHouse.Models
 {
@@ -9,8 +10,9 @@ namespace ClubHouse.Models
     /// </summary>
     public class Epic : ClubHouseModel<int>
     {
-        public IList<string> FollowerIds { get; set; }
-        public IList<string> OwnerIds { get; set; }
+
+        public ICollection<string> FollowerIds { get; set; } = new Collection<string>();
+        public ICollection<string> OwnerIds { get; set; } = new Collection<string>();
         public DateTime? Deadline { get; set; }
         [HideFromUpdate, HideFromCreate]
         public int Position { get; set; }
@@ -22,8 +24,8 @@ namespace ClubHouse.Models
         public bool Archived { get; set; }
         public string Description { get; set; }
         public EpicState State { get; set; }
-        [HideFromUpdate, HideFromCreate]
-        public DateTime CreatedAt { get; set; }
+        [HideFromUpdate]
+        public DateTime? CreatedAt { get; set; }
         [HideFromUpdate, HideFromCreate]
         public DateTime UpdatedAt { get; set; }
     }

@@ -8,8 +8,8 @@ namespace ClubHouse.Models
     /// </summary>
     public class Label : ClubHouseModel<int>
     {
-        [HideFromUpdate, HideFromCreate]
-        public DateTime CreatedAt { get; set; }
+        [HideFromUpdate]
+        public DateTime? CreatedAt { get; set; }
         [HideFromUpdate, HideFromCreate]
         public DateTime UpdatedAt { get; set; }
         public string Name { get; set; }

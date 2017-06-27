@@ -16,6 +16,7 @@ namespace ClubHouse
         {
             _apiToken = apiToken;
         }
+
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             var token = _apiToken();
@@ -39,6 +40,7 @@ namespace ClubHouse
             }
 
             //perform the request
+
             var result = await base.SendAsync(request, cancellationToken);
 
             //now we deal with the result

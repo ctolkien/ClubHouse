@@ -14,7 +14,4 @@ namespace ClubHouse.Resources
         /// <returns></returns>
         Task<TModel> Update(TInput model);
     }
-
-
-
 }

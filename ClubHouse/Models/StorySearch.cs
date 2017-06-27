@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace ClubHouse.Models
 {
@@ -9,13 +10,13 @@ namespace ClubHouse.Models
     /// </summary>
     public class StorySearch
     {
-        public IList<int> ProjectIds { get; set; }
-        public IList<string> OwnerIds { get; set; }
+        public ICollection<int> ProjectIds { get; set; } = new Collection<int>();
+        public ICollection<string> OwnerIds { get; set; } = new Collection<string>();
         public int? Estimate { get; set; }
         public StoryType? StoryType { get; set; }
         public string Text { get; set; }
-        public IList<int> EpicIds { get; set; }
-        public IList<Workflow.WorkflowStateType> WorkflowStateTypes { get; set; }
+        public ICollection<int> EpicIds { get; set; } = new Collection<int>();
+        public ICollection<Workflow.WorkflowStateType> WorkflowStateTypes { get; set; }
         public DateTime? UpdatedAtEnd { get; set; }
         public DateTime? UpdatedAtStart { get; set; }
         public int? ProjectId { get; set; }
@@ -29,5 +30,4 @@ namespace ClubHouse.Models
 
         public DateTime? CreatedAtEnd { get; set; }
     }
-
 }

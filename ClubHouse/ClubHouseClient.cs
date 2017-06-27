@@ -45,11 +45,7 @@ namespace ClubHouse
             }
         }
 
-
-        /// <summary>
-        /// This constructure is used for testing only - allows you to inject your own message handler
-        /// </summary>
-        /// <param name="messageHandler"></param>
+        //Actual meat of construction is done here. This ctor is also used for testing
         internal ClubHouseClient(HttpMessageHandler messageHandler)
         {
             if (messageHandler == null)
@@ -111,7 +107,7 @@ namespace ClubHouse
 
         public void Dispose()
         {
-            ((IDisposable)HttpClient).Dispose();
+            HttpClient.Dispose();
         }
     }
 }

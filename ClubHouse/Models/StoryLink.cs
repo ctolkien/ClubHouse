@@ -5,10 +5,10 @@ namespace ClubHouse.Models
 {
     public class StoryLink : ClubHouseModel<int>
     {
-        [HideFromUpdate, HideFromCreate]
-        public DateTime CreatedAt { get; set; }
+        [HideFromUpdate]
+        public DateTime? CreatedAt { get; set; }
         public int SubjectId { get; set; }
-        [HideFromCreate]
+        [HideFromCreate, HideFromUpdate]
         public DateTime UpdatedAt { get; set; }
         public StoryLinkVerb Verb { get; set; }
         public int ObjectId { get; set; }

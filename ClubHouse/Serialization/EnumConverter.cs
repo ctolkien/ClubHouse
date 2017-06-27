@@ -11,7 +11,6 @@ namespace ClubHouse.Serialization
         {
             //Todo: make this more resiliant
             return reader.Value.ToString().DehumanizeTo(objectType);
-
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
@@ -23,7 +22,6 @@ namespace ClubHouse.Serialization
                 .Trim();
 
             serializer.Serialize(writer, alteredValue);
-
         }
     }
 }

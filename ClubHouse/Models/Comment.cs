@@ -11,8 +11,8 @@ namespace ClubHouse.Models
     public class Comment : ClubHouseModel<int>
     {
         public string AuthorId { get; set; }
-        [HideFromCreate, HideFromUpdate]
-        public DateTime CreatedAt { get; set; }
+        [HideFromUpdate]
+        public DateTime? CreatedAt { get; set; }
         [HideFromCreate]
         public DateTime UpdatedAt { get; set; }
         public string Text { get; set; }
@@ -21,6 +21,6 @@ namespace ClubHouse.Models
         /// <summary>
         /// A collection of child comments.
         /// </summary>
-        public IReadOnlyList<Comment> Comments { get; set; }
+        public IReadOnlyCollection<Comment> Comments { get; set; }
     }
 }
