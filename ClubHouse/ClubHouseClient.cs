@@ -62,8 +62,11 @@ namespace ClubHouse
             Projects = new ProjectResource(HttpClient);
             StoryLinks = new StoryLinkResource(HttpClient);
             Stories = new StoryResource(HttpClient);
-            Users = new UserResource(HttpClient);
             Workflows = new WorkflowResource(HttpClient);
+            Categories = new CategoryResource(HttpClient);
+            Milestones = new MilestoneResource(HttpClient);
+            Repositories = new RepositoryResource(HttpClient);
+            Teams = new TeamResource(HttpClient);
         }
 
         /// <summary>
@@ -74,10 +77,6 @@ namespace ClubHouse
         /// Access Clubhouse <see cref="Models.Epic">Epics</see>.
         /// </summary>
         public IEpicResource Epics { get; }
-        /// <summary>
-        /// Access Clubhouse <see cref="Models.User">Users</see>.
-        /// </summary>
-        public IUserResource Users { get; }
         /// <summary>
         /// Access Clubhouse <see cref="Models.Label">Labels</see>.
         /// </summary>
@@ -101,9 +100,26 @@ namespace ClubHouse
         /// </summary>
         public IWorkflowResource Workflows { get; }
         /// <summary>
-        /// Gets access to Clubhouse <see cref="Models.Story">Stories</see>
+        /// Access to Clubhouse <see cref="Models.Story">Stories</see>
         /// </summary>
         public IStoryResource Stories { get; }
+
+        /// <summary>
+        /// Access to Clubhouse <see cref="Models.Category">Categories</see>
+        /// </summary>
+        public ICategoryResource Categories { get; }
+        /// <summary>
+        /// Access to Clubhouse <see cref="Models.Milestone">Milestones</see>
+        /// </summary>
+        public IMilestoneResource Milestones { get; }
+        /// <summary>
+        /// Access to Clubhouse <see cref="Models.Repository">Repositories</see>
+        /// </summary>
+        public IRepositoryResource Repositories { get; }
+        /// <summary>
+        /// Access to Clubhouse <see cref="Models.Team">Teams</see>
+        /// </summary>
+        public ITeamResource Teams { get; }
 
         public void Dispose()
         {

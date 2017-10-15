@@ -1,7 +1,8 @@
 ﻿namespace ClubHouse.Models
 {
     /// <summary>
-    /// A Clubhouse <see cref="File"/> which is hosted on a 3rd party service.
+    /// Linked files are stored on a third-party website and linked to one or more <see cref="Story">Stories</see>.
+    /// Clubhouse currently supports linking files from Google Drive, Dropbox, Box, and by URL.
     /// See all <seealso cref="LinkedFileType"/>
     /// </summary>
     public class LinkedFile : File
