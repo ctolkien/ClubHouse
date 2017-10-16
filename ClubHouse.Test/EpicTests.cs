@@ -1,4 +1,4 @@
-using ClubHouse.Models;
+//using ClubHouse.Models;
 using System;
 using System.Threading.Tasks;
 using Xunit;
@@ -16,7 +16,7 @@ namespace ClubHouse.Test
             var response = await client.Epics.Get(1);
 
             Assert.Equal(123, response.Id);
-            Assert.Equal(EpicState.ToDo, response.State);
+            Assert.Equal(Models.EpicState.ToDo, response.State);
         }
 
         [Fact]
@@ -24,11 +24,11 @@ namespace ClubHouse.Test
         {
             var client = CreateClient();
 
-            var e = new EpicUpdate
+            var e = new Models.EpicUpdate
             {
                 Id = 22,
                 Name = "new epic name #2",
-                State = EpicState.InProgress
+                State = Models.EpicState.InProgress
             };
 
             await client.Epics.Update(e);
@@ -49,7 +49,7 @@ namespace ClubHouse.Test
         {
             var client = CreateClient();
 
-            var foo = await client.Epics.Create(new Epic
+            var foo = await client.Epics.Create(new Models.Epic
             {
                 Name = "Wasahhh"
             });

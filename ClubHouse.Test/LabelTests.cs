@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Xunit;
+﻿using Xunit;
 using static ClubHouse.Test.TestHelpers;
 
 
@@ -8,7 +7,7 @@ namespace ClubHouse.Test
     public class LabelTests
     {
         [Fact]
-        public async Task List()
+        public async System.Threading.Tasks.Task List()
         {
             var client = CreateClient();
 
@@ -19,7 +18,7 @@ namespace ClubHouse.Test
         }
 
         [Fact]
-        public async Task Create()
+        public async System.Threading.Tasks.Task Create()
         {
             var client = CreateClient();
 
@@ -28,11 +27,11 @@ namespace ClubHouse.Test
                 Name = "This is my test label #2"
             });
 
-            Assert.Equal(0, label.NumStoriesCompleted);
+            Assert.Equal(0, label.Statistics.StoriesCompleted);
         }
 
         [Fact]
-        public async Task Update()
+        public async System.Threading.Tasks.Task Update()
         {
             var client = CreateClient();
 

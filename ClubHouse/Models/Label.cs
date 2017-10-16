@@ -30,6 +30,6 @@ namespace ClubHouse.Models
         public string Name { get; set; }
 
         [JsonProperty(PropertyName = "stats")]
-        public IReadOnlyCollection<LabelStatistics> Statistics { get; set; } = new Collection<LabelStatistics>();
+        public LabelStatistics Statistics { get; set; }
     }
 }

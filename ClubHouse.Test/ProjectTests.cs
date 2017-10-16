@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Xunit;
 using static ClubHouse.Test.TestHelpers;
 
@@ -29,7 +26,6 @@ namespace ClubHouse.Test
             var result = await client.Projects.Get(6);
 
             Assert.Equal("sample project", result.Name);
-
         }
 
         [Fact]

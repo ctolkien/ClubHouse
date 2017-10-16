@@ -1,4 +1,6 @@
-﻿namespace ClubHouse.Models
+﻿using ClubHouse.Serialization;
+
+namespace ClubHouse.Models
 {
     /// <summary>
     /// A Category can be used to associate Milestones.
@@ -8,6 +10,7 @@
         /// <summary>
         /// A true/false boolean indicating if the Category has been archived.
         /// </summary>
+        //[HideFromCreate]
         public bool Archived { get; set; }
         /// <summary>
         /// The hex color to be displayed with the Category (for example, “#ff0000”).

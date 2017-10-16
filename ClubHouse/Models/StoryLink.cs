@@ -1,7 +1,4 @@
-﻿using ClubHouse.Serialization;
-using System;
-
-namespace ClubHouse.Models
+﻿namespace ClubHouse.Models
 {
     /// <summary>
     /// Story links allow you create semantic relationships between two stories.
@@ -24,12 +21,29 @@ namespace ClubHouse.Models
         /// The type of Story Link. This can be “blocks”, “duplicates”, or “relates to”.
         /// </summary>
         public StoryLinkVerb Verb { get; set; }
+
+        public enum StoryLinkVerb
+        {
+            Blocks,
+            Duplicates,
+            RelatesTo
+        }
     }
 
-    public enum StoryLinkVerb
+    /// <summary>
+    /// The type of Story Link. The string can be subject or object.
+    /// </summary>
+    public class TypedStoryLink : StoryLink
     {
-        Blocks,
-        Duplicates,
-        RelatesTo
+        /// <summary>
+        /// This indicates whether the Story is the subject or object in the Story Link.
+        /// </summary>
+        public TypedStoryLinkType Type { get; set; }
+
+        public enum TypedStoryLinkType
+        {
+            Subject,
+            Object
+        }
     }
 }

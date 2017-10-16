@@ -58,17 +58,15 @@ namespace ClubHouse.Test
                 Position = 123,
                 OwnerIds = new List<string> { "12345678-9012-3456-7890-123456789012" },
                 Name = "foo",
-                Comments = new List<Models.Comment>
+                Comments = new List<Models.ThreadedComment>
                 {
-                    new Models.Comment
+                    new Models.ThreadedComment
                     {
                         AuthorId = "12345678-9012-3456-7890-123456789012",
                         CreatedAt = new DateTime(2016,12,31,12,30,0, DateTimeKind.Unspecified),
                         UpdatedAt = new DateTime(2016,12,31,12,30,0, DateTimeKind.Unspecified),
                         Text = "foo",
-                        Deleted = true,
                         Id = 123
-
                     }
                 },
                 Archived = true,

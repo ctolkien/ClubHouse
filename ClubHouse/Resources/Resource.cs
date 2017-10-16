@@ -102,7 +102,7 @@ namespace ClubHouse.Resources
             return JsonConvert.DeserializeObject<TOutput>(await result.Content.ReadAsStringAsync(), DefaultSettings);
         }
 
-        public virtual async Task Delete(TKey id)
+        public virtual async System.Threading.Tasks.Task Delete(TKey id)
         {
             await _client.DeleteAsync(ResourceUrl(id));
         }

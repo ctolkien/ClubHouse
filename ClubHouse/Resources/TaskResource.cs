@@ -3,7 +3,7 @@ using ClubHouse.Models;
 
 namespace ClubHouse.Resources
 {
-    internal class TaskResource : Resource<StoryTask, int>,  ITaskResource
+    internal class TaskResource : Resource<Task, int>,  ITaskResource
     {
         protected override string ResourceName => $"{_storyId}/tasks";
         private int _storyId;
@@ -15,9 +15,9 @@ namespace ClubHouse.Resources
     }
 
     public interface ITaskResource :
-        ICreateable<StoryTask, StoryTask, int>,
-        IGettable<StoryTask, int>,
-        IUpdateable<StoryTask, StoryTask, int>,
+        ICreateable<Task, Task, int>,
+        IGettable<Task, int>,
+        IUpdateable<Task, Task, int>,
         IDeletable<int>
     {
     }

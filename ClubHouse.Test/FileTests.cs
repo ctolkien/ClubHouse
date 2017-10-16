@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
+﻿using Xunit;
 using static ClubHouse.Test.TestHelpers;
 
 namespace ClubHouse.Test
@@ -10,7 +6,7 @@ namespace ClubHouse.Test
     public class FileTests
     {
         [Fact]
-        public async Task List()
+        public async System.Threading.Tasks.Task List()
         {
             var client = CreateClient();
             var list = await client.Files.List();
@@ -19,7 +15,7 @@ namespace ClubHouse.Test
         }
 
         [Fact]
-        public async Task Update()
+        public async System.Threading.Tasks.Task Update()
         {
             var client = CreateClient();
 
@@ -28,7 +24,6 @@ namespace ClubHouse.Test
                 Id = 43,
                 Description = "Here is the new description"
             });
-
         }
     }
 }

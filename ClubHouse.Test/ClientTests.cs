@@ -9,11 +9,11 @@ namespace ClubHouse.Test
 {
     public class ClienTests
     {
-        private readonly ITestOutputHelper output;
+        private readonly ITestOutputHelper _output;
 
         public ClienTests(ITestOutputHelper output)
         {
-            this.output = output;
+            this._output = output;
         }
 
 
@@ -27,10 +27,8 @@ namespace ClubHouse.Test
             Thread.Sleep(1000);
             var result2 = await client.HttpClient.GetAsync("https://www.sodadigital.com.au");
 
-            output.WriteLine(result1.RequestMessage.RequestUri.ToString());
-            output.WriteLine(result2.RequestMessage.RequestUri.ToString());
-
-
+            _output.WriteLine(result1.RequestMessage.RequestUri.ToString());
+            _output.WriteLine(result2.RequestMessage.RequestUri.ToString());
 
         }
     }
