@@ -7,11 +7,11 @@ using System.Runtime.CompilerServices;
 namespace ClubHouse
 {
     /// <summary>
-    /// Provices a wrapper over the Clubhouse.io API.
+    /// Provides a wrapper over the Clubhouse.io API.
     /// </summary>
     public class ClubHouseClient : IDisposable
     {
-        const string EndPoint = "https://api.clubhouse.io/api/v1/";
+        const string EndPoint = "https://api.clubhouse.io/api/v2/";
         internal HttpClient HttpClient;
 
         /// <summary>

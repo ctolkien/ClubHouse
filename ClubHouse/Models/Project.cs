@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using ClubHouse.Serialization;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,6 +19,7 @@ namespace ClubHouse.Models
         /// <summary>
         /// True/false boolean indicating whether the Project is in an Archived state.
         /// </summary>
+        [HideFromCreate]
         public bool Archived { get; set; }
 
         /// <summary>

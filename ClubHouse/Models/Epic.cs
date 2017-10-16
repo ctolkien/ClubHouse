@@ -113,9 +113,20 @@ namespace ClubHouse.Models
 
     }
 
+    /// <summary>
+    /// Update Epic can be used to update numerous fields in the Epic.
+    /// The only required parameter is Epic ID, which can be found in the Clubhouse UI.
+    /// </summary>
     public class EpicUpdate : Epic
     {
+        /// <summary>
+        /// The ID of the Epic we want to move this Epic after.
+        /// </summary>
         public int? AfterId { get; set; }
+
+        /// <summary>
+        /// The ID of the Epic we want to move this Epic
+        /// </summary>
         public int? BeforeId { get; set; }
     }
 

@@ -25,5 +25,8 @@ namespace ClubHouse.Resources
         IUpdateable<Epic, EpicUpdate, int>,
         IDeletable<int>
     {
+
+
+
     }
 }

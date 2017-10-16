@@ -14,6 +14,7 @@ namespace ClubHouse.Models
         /// <summary>
         /// A string description of this resource.
         /// </summary>
+        [HideFromUpdate]
         public string EntityType { get; set; }
     }
 

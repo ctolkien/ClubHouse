@@ -1,6 +1,5 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using ClubHouse.Serialization;
+using Newtonsoft.Json;
 
 namespace ClubHouse.Models
 {
@@ -12,6 +11,7 @@ namespace ClubHouse.Models
         /// <summary>
         /// A true/false boolean indicating if the Label has been archived.
         /// </summary>
+        [HideFromCreate]
         public bool Archived { get; set; }
 
         /// <summary>

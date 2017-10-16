@@ -10,7 +10,7 @@ namespace ClubHouse.Models
         /// <summary>
         /// A true/false boolean indicating if the Category has been archived.
         /// </summary>
-        //[HideFromCreate]
+        [HideFromCreate]
         public bool Archived { get; set; }
         /// <summary>
         /// The hex color to be displayed with the Category (for example, “#ff0000”).
@@ -27,6 +27,7 @@ namespace ClubHouse.Models
         /// <summary>
         /// The type of entity this Category is associated with
         /// </summary>
+        [HideFromUpdate]
         public CategoryType Type { get; set; }
     }
 

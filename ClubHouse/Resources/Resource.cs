@@ -106,6 +106,5 @@ namespace ClubHouse.Resources
         {
             await _client.DeleteAsync(ResourceUrl(id));
         }
-
     }
 }
