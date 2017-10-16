@@ -26,6 +26,7 @@ namespace ClubHouse.Models
         /// <summary>
         /// A true/false boolean indicating if the <see cref="Epic"/> has been completed.
         /// </summary>
+        [HideFromCreate, HideFromUpdate]
         public bool Completed { get; set; }
 
         /// <summary>
@@ -91,6 +92,7 @@ namespace ClubHouse.Models
         /// <summary>
         /// A true/false boolean indicating if the Epic has been started.
         /// </summary>
+        [HideFromCreate, HideFromUpdate]
         public bool Started { get; set; }
 
         /// <summary>

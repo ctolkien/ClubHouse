@@ -1,5 +1,6 @@
 //using ClubHouse.Models;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 using static ClubHouse.Test.TestHelpers;
@@ -13,10 +14,10 @@ namespace ClubHouse.Test
         {
             var client = CreateClient();
 
-            var response = await client.Epics.Get(1);
+            var response = await client.Epics.Get(500);
 
-            Assert.Equal(123, response.Id);
-            Assert.Equal(Models.EpicState.ToDo, response.State);
+            Assert.Equal(500, response.Id);
+            Assert.Equal(Models.EpicState.InProgress, response.State);
         }
 
         [Fact]
@@ -26,7 +27,7 @@ namespace ClubHouse.Test
 
             var e = new Models.EpicUpdate
             {
-                Id = 22,
+                Id = 500,
                 Name = "new epic name #2",
                 State = Models.EpicState.InProgress
             };
@@ -41,7 +42,11 @@ namespace ClubHouse.Test
 
             var foo = await client.Epics.List();
 
-            Assert.Equal(4, foo.Count);
+            Assert.Equal(11, foo.Count);
+            Assert.Equal(1, foo.Count(x => x.State == Models.EpicState.ToDo));
+            Assert.Equal(3, foo.Count(x => x.State == Models.EpicState.InProgress));
+            Assert.Equal(7, foo.Count(x => x.State == Models.EpicState.Done));
+
         }
 
         [Fact]
@@ -61,7 +66,7 @@ namespace ClubHouse.Test
         public async Task DeleteEpic()
         {
             var client = CreateClient();
-            await client.Epics.Delete(10);
+            await client.Epics.Delete(500);
         }
     }
 }
