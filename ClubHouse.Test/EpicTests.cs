@@ -53,7 +53,7 @@ namespace ClubHouse.Test
         {
             var client = CreateClient();
 
-            var foo = await client.Epics.Create(new Models.Epic
+            var foo = await client.Epics.Create(new Models.EpicCreate
             {
                 Name = "foo"
             });

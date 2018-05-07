@@ -12,6 +12,8 @@ namespace ClubHouse.Resources
         {
         }
 
+        public Task<Epic> Create(EpicCreate model) => base.Update(model);
+
         public Task<Epic> Update(EpicUpdate model) => base.Update(model);
 
         public ICommentResource Comments(int id) => new CommentResource(id, _client);
