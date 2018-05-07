@@ -15,7 +15,6 @@
         /// </summary>
         public Profile Profile { get; set; }
 
-
         /// <summary>
         /// The Member’s role in the Clubhouse organization.
         /// </summary>
@@ -31,26 +30,32 @@
         /// A true/false boolean indicating whether the Member has been deactivated within Clubhouse.
         /// </summary>
         public bool Deactivated { get; set; }
+
         /// <summary>
         /// The Member’s avatar Icon.
         /// </summary>
         public string DisplayIcon { get; set; }
+
         /// <summary>
         /// The primary email address of the Member with the Organization.
         /// </summary>
         public string EmailAddress { get; set; }
+
         /// <summary>
         /// This is the gravatar hash associated with <see cref="EmailAddress"/>.
         /// </summary>
         public string GravatarHash { get; set; }
+
         /// <summary>
         /// The Member’s username within the Organization.
         /// </summary>
         public string MentionName { get; set; }
+
         /// <summary>
         /// The Member’s name within the Organization.
         /// </summary>
         public string Name { get; set; }
+
         /// <summary>
         /// If Two Factor Authentication is activated for this User.
         /// </summary>

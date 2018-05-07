@@ -1,11 +1,9 @@
 ﻿using ClubHouse.Serialization;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace ClubHouse.Models
 {
-
     public class Task : UpdatableClubHouseModel<int>
     {
         /// <summary>

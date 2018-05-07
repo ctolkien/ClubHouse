@@ -1,4 +1,5 @@
-﻿using ClubHouse.Serialization;
+﻿using ClubHouse.Models;
+using ClubHouse.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -9,45 +10,43 @@ namespace ClubHouse.Test
 {
     internal class MockedResponseHandler : DelegatingHandler
     {
-        private readonly Dictionary<Uri, HttpResponseMessage> _FakeGetResponses = new Dictionary<Uri, HttpResponseMessage>();
-        private readonly Dictionary<Uri, HttpResponseMessage> _FakePostResponses = new Dictionary<Uri, HttpResponseMessage>();
-        private readonly Dictionary<Uri, HttpResponseMessage> _FakePutResponses = new Dictionary<Uri, HttpResponseMessage>();
-        private readonly Dictionary<Uri, HttpResponseMessage> _FakeDeleteResponses = new Dictionary<Uri, HttpResponseMessage>();
+        private readonly Dictionary<Uri, HttpResponseMessage> _fakeGetResponses = new Dictionary<Uri, HttpResponseMessage>();
+        private readonly Dictionary<Uri, HttpResponseMessage> _fakePostResponses = new Dictionary<Uri, HttpResponseMessage>();
+        private readonly Dictionary<Uri, HttpResponseMessage> _fakePutResponses = new Dictionary<Uri, HttpResponseMessage>();
 
+        public void AddFakeGetResponse(Uri uri, HttpResponseMessage responseMessage) => _fakeGetResponses.Add(uri, responseMessage);
 
-        public void AddFakeGetResponse(Uri uri, HttpResponseMessage responseMessage)
-        {
-            _FakeGetResponses.Add(uri, responseMessage);
-        }
-        public void AddFakePostResponse(Uri uri, HttpResponseMessage responseMessage)
-        {
-            _FakePostResponses.Add(uri, responseMessage);
-        }
+        public void AddFakePostResponse(Uri uri, HttpResponseMessage responseMessage) => _fakePostResponses.Add(uri, responseMessage);
+
+        public void AddFakePutResponse(Uri uri, HttpResponseMessage responseMessage) => _fakePutResponses.Add(uri, responseMessage);
 
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         protected async override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, System.Threading.CancellationToken cancellationToken)
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
-            if (request.Method == HttpMethod.Get && _FakeGetResponses.ContainsKey(request.RequestUri))
+            if (request.Method == HttpMethod.Get && _fakeGetResponses.ContainsKey(request.RequestUri))
             {
-                return _FakeGetResponses[request.RequestUri];
+                return _fakeGetResponses[request.RequestUri];
             }
-            if (request.Method == HttpMethod.Post && _FakePostResponses.ContainsKey(request.RequestUri))
+            if (request.Method == HttpMethod.Post && _fakePostResponses.ContainsKey(request.RequestUri))
             {
-                return _FakePostResponses[request.RequestUri];
+                return _fakePostResponses[request.RequestUri];
+            }
+            if (request.Method == HttpMethod.Put && _fakePutResponses.ContainsKey(request.RequestUri))
+            {
+                return _fakePutResponses[request.RequestUri];
             }
             else
             {
-                return new HttpResponseMessage(HttpStatusCode.NotFound) { RequestMessage = request };
+                throw new Exceptions.NotFoundException($"Request Uri not found in collection. {request.Method} {request.RequestUri}");
+                //return new HttpResponseMessage(HttpStatusCode.NotFound) { RequestMessage = request };
             }
-
         }
-
     }
 
-    static class MockExtensions
+    internal static class MockExtensions
     {
-        const string EndPoint = "https://api.clubhouse.io/api/v1/";
+        private const string EndPoint = "https://api.clubhouse.io/api/v2/";
 
         public static MockedResponseHandler Epic(this MockedResponseHandler handler)
         {
@@ -78,7 +77,6 @@ namespace ClubHouse.Test
 
             };
 
-
             var responseMessage = new HttpResponseMessage
             {
                 StatusCode = HttpStatusCode.Created,
@@ -86,6 +84,71 @@ namespace ClubHouse.Test
             };
 
             handler.AddFakeGetResponse(new Uri($"{EndPoint}epics/1"), responseMessage);
+            handler.AddFakeGetResponse(new Uri($"{EndPoint}epics/123"), responseMessage);
+
+
+
+            return handler;
+        }
+
+        public static MockedResponseHandler Categories(this MockedResponseHandler handler)
+        {
+            var arrayContent = @"
+[
+  {
+    'archived': true,
+    'color': 'foo',
+    'created_at': '2016-12-31T12:30:00Z',
+    'entity_type': 'foo',
+    'external_id': 'foo',
+    'id': 497,
+    'name': 'foo',
+    'type': 'milestone',
+    'updated_at': '2016-12-31T12:30:00Z'
+  }
+]";
+
+            var content = @"
+  {
+    'archived': true,
+    'color': 'foo',
+    'created_at': '2016-12-31T12:30:00Z',
+    'entity_type': 'foo',
+    'external_id': 'foo',
+    'id': 497,
+    'name': 'foo',
+    'type': 'milestone',
+    'updated_at': '2016-12-31T12:30:00Z'
+  }
+";
+
+            handler.AddFakeGetResponse(new Uri($"{EndPoint}categories"), new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = new StringContent(arrayContent)
+            });
+
+            handler.AddFakePostResponse(new Uri($"{EndPoint}categories"), new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.Created,
+                Content = new StringContent(content)
+            });
+
+            handler.AddFakeGetResponse(new Uri($"{EndPoint}categories/497"), new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = new StringContent(content)
+            });
+
+            handler.AddFakePutResponse(new Uri($"{EndPoint}categories/497"), new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(new Category
+                {
+                    Name = "Test Category 2",
+                    Color = "#ff0000"
+                }, new DefaultSerializerSettings()))
+            });
 
             return handler;
         }

@@ -6,7 +6,7 @@ namespace ClubHouse.Resources
     internal class TaskResource : Resource<Task, int>,  ITaskResource
     {
         protected override string ResourceName => $"{_storyId}/tasks";
-        private int _storyId;
+        private readonly int _storyId;
 
         internal TaskResource(int storyId, HttpClient client) : base(client)
         {

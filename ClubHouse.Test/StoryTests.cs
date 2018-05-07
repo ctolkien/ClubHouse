@@ -20,7 +20,6 @@ namespace ClubHouse.Test
             });
 
             Assert.Equal(2, result.Count);
-
         }
 
         [Fact]
@@ -35,7 +34,6 @@ namespace ClubHouse.Test
             var result = await client.Stories.Search(search);
 
             Assert.Equal(2, result.Count);
-
         }
     }
 }

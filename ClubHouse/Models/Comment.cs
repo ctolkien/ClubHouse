@@ -1,5 +1,6 @@
 ﻿using ClubHouse.Serialization;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace ClubHouse.Models
 {
@@ -21,7 +22,7 @@ namespace ClubHouse.Models
         /// <summary>
         /// The unique IDs of the Member who are mentioned in the Comment.
         /// </summary>
-        public IReadOnlyCollection<string> MentionIds { get; set; }
+        public IReadOnlyCollection<string> MentionIds { get; set; } = new Collection<string>();
 
         /// <summary>
         /// The Comments numerical position in the list from oldest to newest.

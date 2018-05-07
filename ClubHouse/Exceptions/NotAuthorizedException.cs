@@ -8,7 +8,14 @@ namespace ClubHouse.Exceptions
     {
         public NotAuthorizedException(string message) : base(message)
         {
+        }
 
+        public NotAuthorizedException()
+        {
+        }
+
+        public NotAuthorizedException(string message, Exception innerException) : base(message, innerException)
+        {
         }
     }
 }

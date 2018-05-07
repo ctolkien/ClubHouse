@@ -33,6 +33,7 @@ namespace ClubHouse.Models
         /// The time/date the <see cref="Epic"/> was completed.
         /// </summary>
         public DateTime? CompletedAt { get; set; }
+
         /// <summary>
         /// A manual override for the time/date the <see cref="Epic"/> was completed.
         /// </summary>
@@ -42,6 +43,7 @@ namespace ClubHouse.Models
         /// The <see cref="Epic"/> deadline.
         /// </summary>
         public DateTime? Deadline { get; set; }
+
         /// <summary>
         /// The <see cref="Epic"/> description.
         /// </summary>
@@ -68,10 +70,9 @@ namespace ClubHouse.Models
         public int? MilestoneId { get; set; }
 
         /// <summary>
-        /// An array of UUIDs for any members you want to add as Owners on this new Epic.
+        /// An array of UUIDs for any members you want to add as Owners on this new <see cref="Epic"/>.
         /// </summary>
         public ICollection<string> OwnerIds { get; set; } = new Collection<string>();
-
 
         /// <summary>
         /// The name of the <see cref="Epic"/>.
@@ -112,7 +113,14 @@ namespace ClubHouse.Models
 
         [JsonProperty(PropertyName = "stats")]
         public EpicStatistics Statistics { get; set; }
+    }
 
+    public class EpicCreate : Epic
+    {
+        /// <summary>
+        /// The ID of the member that requested the epic.
+        /// </summary>
+        public int? RequestedById { get; set; }
     }
 
     /// <summary>
@@ -130,6 +138,11 @@ namespace ClubHouse.Models
         /// The ID of the Epic we want to move this Epic
         /// </summary>
         public int? BeforeId { get; set; }
+
+        /// <summary>
+        /// The ID of the member that requested the epic.
+        /// </summary>
+        public int? RequestedById { get; set; }
     }
 
     public enum EpicState
@@ -138,6 +151,7 @@ namespace ClubHouse.Models
         InProgress,
         Done
     }
+
     //TODO - clean this up
     public class EpicStatistics
     {
@@ -151,6 +165,7 @@ namespace ClubHouse.Models
 
         [JsonProperty(PropertyName = "num_points")]
         public int Points { get; set; }
+
         [JsonProperty(PropertyName = "num_points_done")]
         public int PointsDone { get; set; }
 
@@ -171,6 +186,5 @@ namespace ClubHouse.Models
 
         [JsonProperty(PropertyName = "num_stories_unstarted")]
         public int StoriesUnstarted { get; set; }
-
     }
 }

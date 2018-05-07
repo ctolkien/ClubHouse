@@ -12,99 +12,84 @@ namespace ClubHouse.Resources
         protected readonly HttpClient _client;
         protected abstract string ResourceName { get; }
 
-        protected static JsonSerializerSettings DefaultUpdateSettings = new UpdateSerializerSettings();
-        protected static JsonSerializerSettings DefaultCreateSettings = new CreateSerializerSettings();
-        protected static JsonSerializerSettings DefaultSettings = new DefaultSerializerSettings();
-
-        internal Resource(HttpClient client)
+        protected Resource(HttpClient client)
         {
             _client = client;
         }
 
-        protected virtual string ResourceUrl()
-        {
-            return $"{ResourceName}";
-        }
-        protected virtual string ResourceUrl(TKey id)
-        {
-            return $"{ResourceName}/{id}";
-        }
-        protected virtual string ResourceUrl(bool bulk)
-        {
-            return $"{ResourceName}/bulk";
-        }
+        protected virtual string ResourceUrl() => ResourceName;
+
+        protected virtual string ResourceUrl(TKey id) => $"{ResourceName}/{id}";
+        protected virtual string ResourceUrl(bool bulk) => $"{ResourceName}/bulk";
 
         public virtual async Task<IReadOnlyList<TModel>> List()
         {
-            var result = await _client.GetAsync(ResourceUrl());
-            var content = await result.Content.ReadAsStringAsync();
+            var result = await _client.GetAsync(ResourceUrl()).ConfigureAwait(false);
+            var content = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-            return JsonConvert.DeserializeObject<IReadOnlyList<TModel>>(content, DefaultSettings);
+            return JsonConvert.DeserializeObject<IReadOnlyList<TModel>>(content, SerializationSettings.Default);
         }
+
         public virtual async Task<TModel> Get(TKey id)
         {
-            var result = await _client.GetAsync(ResourceUrl(id));
-            var content = await result.Content.ReadAsStringAsync();
+            var result = await _client.GetAsync(ResourceUrl(id)).ConfigureAwait(false);
+            var content = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-            return JsonConvert.DeserializeObject<TModel>(content, DefaultSettings);
+            return JsonConvert.DeserializeObject<TModel>(content, SerializationSettings.Default);
         }
 
-        public virtual async Task<TModel> Create(TModel model)
-        {
-            return await Create<TModel>(model);
-        }
+        public virtual Task<TModel> Create(TModel model) => Create<TModel>(model);
 
-        public virtual async Task<TModel> Create<TInput>(TInput model) where TInput : ClubHouseModel<TKey>
-        {
-            return await Create<TModel>(model, ResourceUrl());
-        }
-        public virtual async Task<TOutput> Create<TInput, TOutput>(IEnumerable<TInput> model) where TInput : ClubHouseModel<TKey>
+        public virtual Task<TModel> Create<TInput>(TInput model) where TInput : ClubHouseModel<TKey> => Create<TModel>(model, ResourceUrl());
+
+        public virtual Task<TOutput> Create<TInput, TOutput>(IEnumerable<TInput> model) where TInput : ClubHouseModel<TKey>
         {
             var collectionWrapped = new Dictionary<string, IEnumerable<TInput>>
             {
                 { ResourceName, model }
             };
 
-            return await Create<TOutput>(collectionWrapped, ResourceUrl(bulk: true));
+            return Create<TOutput>(collectionWrapped, ResourceUrl(bulk: true));
         }
 
         protected async Task<TOutput> Create<TOutput>(object model, string resourceUrl)
         {
-            var serialized = JsonConvert.SerializeObject(model, DefaultCreateSettings);
-            var httpConent = new System.Net.Http.StringContent(serialized);
-            var result = await _client.PostAsync(resourceUrl, httpConent);
-            return JsonConvert.DeserializeObject<TOutput>(await result.Content.ReadAsStringAsync(), DefaultSettings);
+            var serialized = JsonConvert.SerializeObject(model, SerializationSettings.Create);
+            var httpContent = new StringContent(serialized);
+            var result = await _client.PostAsync(resourceUrl, httpContent).ConfigureAwait(false);
+            return JsonConvert.DeserializeObject<TOutput>(await result.Content.ReadAsStringAsync().ConfigureAwait(false), SerializationSettings.Default);
         }
 
+        public virtual Task<TModel> Update(TModel model) => Update<TModel>(model);
 
-        public virtual async Task<TModel> Update(TModel model)
+        public virtual Task<TModel> Update<TInput>(TInput model) where TInput : ClubHouseModel<TKey>
         {
-            return await Update<TModel>(model);
+            return Update<TModel>(model, ResourceUrl(model.Id));
         }
 
-        public virtual async Task<TModel> Update<TInput>(TInput model) where TInput: ClubHouseModel<TKey>
+        public virtual Task<TOutput> Update<TInput, TOutput>(IEnumerable<TInput> model) where TInput : ClubHouseModel<TKey>
         {
-            return await Update<TModel>(model, ResourceUrl(model.Id));
-        }
-
-        public virtual async Task<TOutput> Update<TInput, TOutput>(IEnumerable<TInput> model) where TInput : ClubHouseModel<TKey>
-        {
-            return await Update<TOutput>(model, ResourceUrl(bulk: true));
+            return Update<TOutput>(model, ResourceUrl(bulk: true));
         }
 
         protected async Task<TOutput> Update<TOutput>(object model, string resourceUrl)
         {
-            var serialized = JsonConvert.SerializeObject(model, DefaultUpdateSettings);
-            var httpConent = new System.Net.Http.StringContent(serialized);
+            var serialized = JsonConvert.SerializeObject(model, SerializationSettings.Update);
+            var httpContent = new StringContent(serialized);
 
-            var result = await _client.PutAsync(resourceUrl, httpConent);
+            var result = await _client.PutAsync(resourceUrl, httpContent).ConfigureAwait(false);
 
-            return JsonConvert.DeserializeObject<TOutput>(await result.Content.ReadAsStringAsync(), DefaultSettings);
+            return JsonConvert.DeserializeObject<TOutput>(await result.Content.ReadAsStringAsync().ConfigureAwait(false), SerializationSettings.Default);
         }
 
         public virtual async System.Threading.Tasks.Task Delete(TKey id)
         {
-            await _client.DeleteAsync(ResourceUrl(id));
+            var result = await _client.DeleteAsync(ResourceUrl(id)).ConfigureAwait(false);
+
+            if (result.StatusCode != System.Net.HttpStatusCode.NoContent)
+            {
+                //throw exception
+            }
         }
     }
 }

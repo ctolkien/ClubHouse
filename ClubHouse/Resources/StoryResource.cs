@@ -14,34 +14,26 @@ namespace ClubHouse.Resources
         {
         }
 
-        public ITaskResource Tasks(int id)
+        public ITaskResource Tasks(int id) => new TaskResource(id, _client);
+
+        public ICommentResource Comments(int id) => new CommentResource(id, _client);
+
+        public Task<IReadOnlyList<Story>> Create(IEnumerable<Story> stories)
         {
-            return new TaskResource(id, _client);
+           return base.Create<Story, IReadOnlyList<Story>>(stories);
         }
 
-        public ICommentResource Comments(int id)
+        public Task<IReadOnlyList<Story>> Update(IEnumerable<Story> stories)
         {
-            return new CommentResource(id, _client);
+            return base.Update<Story, IReadOnlyList<Story>>(stories);
         }
 
-        public async Task<IReadOnlyList<Story>> Create(IEnumerable<Story> stories)
-        {
-           return await base.Create<Story, IReadOnlyList<Story>>(stories);
-        }
-
-        public async Task<IReadOnlyList<Story>> Update(IEnumerable<Story> stories)
-        {
-            return await base.Update<Story, IReadOnlyList<Story>>(stories);
-        }
-
-
-        public async Task<IReadOnlyList<Story>> Search(StorySearch search)
+        public Task<IReadOnlyList<Story>> Search(StorySearch search)
         {
             //Note, that we use create here, as it under the covers is a 'post'
             //this should probably be exposed a bit better from the base class.
-            return await Create<IReadOnlyList<Story>>(search, "stories/search");
+            return Create<IReadOnlyList<Story>>(search, "stories/search");
         }
-
     }
 
     public interface IStoryResource :
@@ -59,18 +51,19 @@ namespace ClubHouse.Resources
         /// <param name="stories"></param>
         /// <returns></returns>
         Task<IReadOnlyList<Story>> Create(IEnumerable<Story> stories);
+
         /// <summary>
         /// Batch update a colection of Stories
         /// </summary>
         /// <param name="stories"></param>
         /// <returns></returns>
         Task<IReadOnlyList<Story>> Update(IEnumerable<Story> stories);
+
         /// <summary>
         /// Search Clubhouse Stories for those matching the provided <see cref="StorySearch"/>
         /// </summary>
         /// <param name="search">The search requirements</param>
         /// <returns>A list of matching stories</returns>
         Task<IReadOnlyList<Story>> Search(StorySearch search);
-
     }
 }

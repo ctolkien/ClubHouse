@@ -3,14 +3,16 @@ using ClubHouse.Models;
 
 namespace ClubHouse.Resources
 {
+
     internal class CommentResource : Resource<Comment, int>, ICommentResource
     {
-        private readonly int _storyId;
+        private readonly int _parentItemId;
 
-        protected override string ResourceName => $"{_storyId}/comments";
-        internal CommentResource(int storyId, HttpClient client) : base(client)
+        protected override string ResourceName => $"{_parentItemId}/comments";
+
+        internal CommentResource(int parentItemId, HttpClient client) : base(client)
         {
-            _storyId = storyId;
+            _parentItemId = parentItemId;
         }
     }
 

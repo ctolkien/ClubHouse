@@ -19,7 +19,7 @@ namespace ClubHouse.Serialization
 
     internal class ClubHouseContractResolverSerializerSettings<T> : DefaultSerializerSettings where T: Attribute
     {
-        public ClubHouseContractResolverSerializerSettings()
+        internal ClubHouseContractResolverSerializerSettings()
         {
             ContractResolver = new ClubHouseJsonContractResolver<T>();
         }

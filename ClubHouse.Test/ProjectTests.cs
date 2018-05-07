@@ -2,12 +2,10 @@
 using Xunit;
 using static ClubHouse.Test.TestHelpers;
 
-
 namespace ClubHouse.Test
 {
     public class ProjectTests
     {
-
         [Fact]
         public async Task List()
         {
@@ -40,7 +38,6 @@ namespace ClubHouse.Test
             });
 
             Assert.Equal("Red", result.Color);
-
         }
     }
 }

@@ -2,7 +2,8 @@
 
 namespace ClubHouse.Serialization
 {
-    internal class HideFromUpdateAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Property)]
+    internal sealed class HideFromUpdateAttribute : Attribute
     {
     }
 }

@@ -6,6 +6,7 @@ namespace ClubHouse.Resources
     internal class LinkedFileResource : Resource<LinkedFile, int>, ILinkedFileResource
     {
         protected override string ResourceName => "linked-files";
+
         internal LinkedFileResource(HttpClient client) : base(client)
         {
         }

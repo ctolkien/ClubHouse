@@ -25,6 +25,7 @@ namespace ClubHouse.Models
         /// </summary>
         [HideFromUpdate]
         public DateTime? CreatedAt { get; set; }
+
         /// <summary>
         /// The time/date when the resouce was updated.
         /// </summary>

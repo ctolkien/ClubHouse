@@ -12,18 +12,18 @@ namespace ClubHouse.Test
         [Fact]
         public async Task GetEpic()
         {
-            var client = CreateClient();
+            var client = CreateClient(new MockedResponseHandler().Epic());
 
-            var response = await client.Epics.Get(500);
+            var response = await client.Epics.Get(123);
 
-            Assert.Equal(500, response.Id);
-            Assert.Equal(Models.EpicState.InProgress, response.State);
+            Assert.Equal(123, response.Id);
+            Assert.Equal(Models.EpicState.ToDo, response.State);
         }
 
         [Fact]
         public async Task UpdateEpic()
         {
-            var client = CreateClient();
+            var client = CreateClient(new MockedResponseHandler().Epic());
 
             var e = new Models.EpicUpdate
             {
@@ -38,7 +38,7 @@ namespace ClubHouse.Test
         [Fact]
         public async Task ListEpics()
         {
-            var client = CreateClient();
+            var client = CreateClient(new MockedResponseHandler().Epic());
 
             var foo = await client.Epics.List();
 
@@ -46,7 +46,6 @@ namespace ClubHouse.Test
             Assert.Equal(1, foo.Count(x => x.State == Models.EpicState.ToDo));
             Assert.Equal(3, foo.Count(x => x.State == Models.EpicState.InProgress));
             Assert.Equal(7, foo.Count(x => x.State == Models.EpicState.Done));
-
         }
 
         [Fact]
@@ -56,10 +55,10 @@ namespace ClubHouse.Test
 
             var foo = await client.Epics.Create(new Models.Epic
             {
-                Name = "Wasahhh"
+                Name = "foo"
             });
 
-            Assert.Equal("Wasahhh", foo.Name);
+            Assert.Equal("foo", foo.Name);
         }
 
         [Fact]

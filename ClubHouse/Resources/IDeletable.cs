@@ -2,7 +2,7 @@
 
 namespace ClubHouse.Resources
 {
-    public interface IDeletable<TKey>
+    public interface IDeletable<in TKey>
     {
         /// <summary>
         /// Deletes the specified Clubhouse resource by Id

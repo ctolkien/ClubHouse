@@ -14,6 +14,7 @@ namespace ClubHouse.Resources
 
     public interface ILabelResource :
         IListable<Label, int>,
+        IGettable<Label, int>,
         ICreateable<Label, Label, int>,
         IUpdateable<Label, Label, int>,
         IDeletable<int>

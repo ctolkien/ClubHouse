@@ -8,6 +8,7 @@ namespace ClubHouse.Models
     {
         public Identity()
         {
+            //todo: Implement this
             throw new NotImplementedException();
         }
     }

@@ -5,6 +5,7 @@ using System.Linq;
 using ClubHouse.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace ClubHouse.Serialization
 {
@@ -15,6 +16,7 @@ namespace ClubHouse.Serialization
             NamingStrategy = new SnakeCaseNamingStrategy();
         }
 
+        [DebuggerStepThrough]
         protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
         {
             JsonProperty property = base.CreateProperty(member, memberSerialization);

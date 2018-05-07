@@ -33,7 +33,6 @@ namespace ClubHouse.Models
         /// </summary>
         public int TeamId { get; set; }
 
-
         /// <summary>
         /// Workflow State is any of the at least 3 columns. Workflow States correspond to one of 3 types: Unstarted, Started, or Finished.
         /// </summary>

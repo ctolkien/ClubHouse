@@ -8,5 +8,13 @@ namespace ClubHouse.Exceptions
         public UnprocessableException(string message) : base(message)
         {
         }
+
+        public UnprocessableException()
+        {
+        }
+
+        public UnprocessableException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
     }
 }

@@ -96,9 +96,8 @@ namespace ClubHouse.Models
         public ICollection<LinkedFile> LinkedFiles { get; set; } = new Collection<LinkedFile>();
 
         /// <summary>
-        /// ...
+        /// The time/date the Story was last changed workflow-state.
         /// </summary>
-        /// <remarks>Undocumented in API docs</remarks>
         public DateTime? MovedAt { get; set; }
 
         /// <summary>
@@ -147,7 +146,6 @@ namespace ClubHouse.Models
         /// </summary>
         public ICollection<TypedStoryLink> StoryLinks { get; set; } = new Collection<TypedStoryLink>();
 
-
         /// <summary>
         /// The type of story (feature, bug, chore).
         /// </summary>
@@ -157,7 +155,6 @@ namespace ClubHouse.Models
         /// An array of tasks connected to the story.
         /// </summary>
         public ICollection<Task> Tasks { get; set; } = new Collection<Task>();
-
 
         /// <summary>
         /// The ID of the workflow state the story is currently in.

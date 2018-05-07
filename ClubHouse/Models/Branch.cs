@@ -18,7 +18,7 @@ namespace ClubHouse.Models
         /// <summary>
         /// The IDs of the Branches the Branch has been merged into.
         /// </summary>
-        IReadOnlyCollection<int> MergedBranchIds { get; set; } = new Collection<int>();
+        public IReadOnlyCollection<int> MergedBranchIds { get; set; } = new Collection<int>();
 
         /// <summary>
         /// The name of the Branch.
@@ -30,7 +30,10 @@ namespace ClubHouse.Models
         /// </summary>
         public bool Persistent { get; set; }
 
-        //pull request
+        /// <summary>
+        /// An array of PullRequests attached to the Branch (there is usually only one).
+        /// </summary>
+        public IReadOnlyCollection<PullRequest> PullRequests { get; set; } = new Collection<PullRequest>();
 
         /// <summary>
         /// The ID of the Repository that contains the Branch.

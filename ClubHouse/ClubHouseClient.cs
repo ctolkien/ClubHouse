@@ -9,10 +9,10 @@ namespace ClubHouse
     /// <summary>
     /// Provides a wrapper over the Clubhouse.io API.
     /// </summary>
-    public class ClubHouseClient : IDisposable
+    public class ClubHouseClient
     {
-        const string EndPoint = "https://api.clubhouse.io/api/v2/";
-        internal HttpClient HttpClient;
+        private const string EndPoint = "https://api.clubhouse.io/api/v2/";
+        internal HttpClient _httpClient;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ClubHouseClient"/> class.
@@ -27,6 +27,7 @@ namespace ClubHouse
             {
                 throw new ArgumentNullException(nameof(apiToken));
             }
+
         }
 
         /// <summary>
@@ -53,52 +54,59 @@ namespace ClubHouse
                 throw new ArgumentNullException(nameof(messageHandler));
             }
 
-            HttpClient = new ClubHouseHttpClient(EndPoint, messageHandler);
+            _httpClient = new ClubHouseHttpClient(EndPoint, messageHandler);
 
-            Epics = new EpicResource(HttpClient);
-            Files = new FileResource(HttpClient);
-            Labels = new LabelResource(HttpClient);
-            LinkedFiles = new LinkedFileResource(HttpClient);
-            Projects = new ProjectResource(HttpClient);
-            StoryLinks = new StoryLinkResource(HttpClient);
-            Stories = new StoryResource(HttpClient);
-            Workflows = new WorkflowResource(HttpClient);
-            Categories = new CategoryResource(HttpClient);
-            Milestones = new MilestoneResource(HttpClient);
-            Repositories = new RepositoryResource(HttpClient);
-            Teams = new TeamResource(HttpClient);
+            Epics = new EpicResource(_httpClient);
+            Files = new FileResource(_httpClient);
+            Labels = new LabelResource(_httpClient);
+            LinkedFiles = new LinkedFileResource(_httpClient);
+            Projects = new ProjectResource(_httpClient);
+            StoryLinks = new StoryLinkResource(_httpClient);
+            Stories = new StoryResource(_httpClient);
+            Workflows = new WorkflowResource(_httpClient);
+            Categories = new CategoryResource(_httpClient);
+            Milestones = new MilestoneResource(_httpClient);
+            Repositories = new RepositoryResource(_httpClient);
+            Teams = new TeamResource(_httpClient);
         }
 
         /// <summary>
         /// Access Clubhouse <see cref="Models.Project">Projects</see>.
         /// </summary>
         public IProjectResource Projects { get; }
+
         /// <summary>
         /// Access Clubhouse <see cref="Models.Epic">Epics</see>.
         /// </summary>
         public IEpicResource Epics { get; }
+
         /// <summary>
         /// Access Clubhouse <see cref="Models.Label">Labels</see>.
         /// </summary>
         public ILabelResource Labels { get; }
+
         /// <summary>
         /// Access to Clubhouse <see cref="Models.StoryLink">Story Links</see>.
         /// This is the relationship between multiple stories. For example 'X is blocked by Y'
         /// </summary>
         public IStoryLinkResource StoryLinks { get; }
+
         /// <summary>
         /// Access to Clubhouse <see cref="Models.File">Files</see>.
         /// </summary>
         public IFileResource Files { get; }
+
         /// <summary>
         /// Access to Clubhouse <see cref="Models.LinkedFile">Linked Files</see>.
         /// This are hosted or refered to on a 3rd party external service from Clubhouse.
         /// </summary>
         public ILinkedFileResource LinkedFiles { get; }
+
         /// <summary>
         /// Access to Clubhouse <see cref="Models.Workflow">Workflows</see>.
         /// </summary>
         public IWorkflowResource Workflows { get; }
+
         /// <summary>
         /// Access to Clubhouse <see cref="Models.Story">Stories</see>
         /// </summary>
@@ -108,22 +116,20 @@ namespace ClubHouse
         /// Access to Clubhouse <see cref="Models.Category">Categories</see>
         /// </summary>
         public ICategoryResource Categories { get; }
+
         /// <summary>
         /// Access to Clubhouse <see cref="Models.Milestone">Milestones</see>
         /// </summary>
         public IMilestoneResource Milestones { get; }
+
         /// <summary>
         /// Access to Clubhouse <see cref="Models.Repository">Repositories</see>
         /// </summary>
         public IRepositoryResource Repositories { get; }
+
         /// <summary>
         /// Access to Clubhouse <see cref="Models.Team">Teams</see>
         /// </summary>
         public ITeamResource Teams { get; }
-
-        public void Dispose()
-        {
-            HttpClient.Dispose();
-        }
     }
 }

@@ -12,21 +12,19 @@ namespace ClubHouse.Resources
         {
         }
 
-        public Task<Epic> Update(EpicUpdate model)
-        {
-            return base.Update(model);
-        }
+        public Task<Epic> Update(EpicUpdate model) => base.Update(model);
+
+        public ICommentResource Comments(int id) => new CommentResource(id, _client);
     }
 
     public interface IEpicResource :
         IListable<Epic, int>,
-        ICreateable<Epic, Epic, int>,
+        ICreateable<Epic, EpicCreate, int>,
         IGettable<Epic, int>,
         IUpdateable<Epic, EpicUpdate, int>,
         IDeletable<int>
+
     {
-
-
-
+        ICommentResource Comments(int id);
     }
 }
