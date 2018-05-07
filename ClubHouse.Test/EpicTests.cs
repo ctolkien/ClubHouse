@@ -42,10 +42,7 @@ namespace ClubHouse.Test
 
             var foo = await client.Epics.List();
 
-            Assert.Equal(11, foo.Count);
-            Assert.Equal(1, foo.Count(x => x.State == Models.EpicState.ToDo));
-            Assert.Equal(3, foo.Count(x => x.State == Models.EpicState.InProgress));
-            Assert.Equal(7, foo.Count(x => x.State == Models.EpicState.Done));
+            Assert.Equal(2, foo.Count);
         }
 
         [Fact]

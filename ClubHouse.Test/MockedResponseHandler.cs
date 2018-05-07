@@ -86,6 +86,13 @@ namespace ClubHouse.Test
             handler.AddFakeGetResponse(new Uri($"{EndPoint}epics/1"), responseMessage);
             handler.AddFakeGetResponse(new Uri($"{EndPoint}epics/123"), responseMessage);
 
+            handler.AddFakeGetResponse(new Uri($"{EndPoint}epics"), new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(new[] { content, content }, new DefaultSerializerSettings()))
+            });
+
+            handler.AddFakePutResponse(new Uri($"{EndPoint}epics/500"), responseMessage);
 
 
             return handler;
