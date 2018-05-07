@@ -12,7 +12,7 @@ namespace ClubHouse.Resources
         {
         }
 
-        public Task<Epic> Create(EpicCreate model) => base.Update(model);
+        public Task<Epic> Create(EpicCreate model) => base.Create(model);
 
         public Task<Epic> Update(EpicUpdate model) => base.Update(model);
 

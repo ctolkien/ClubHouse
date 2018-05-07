@@ -51,7 +51,7 @@ namespace ClubHouse.Test
         [Fact]
         public async Task CreateEpic()
         {
-            var client = CreateClient();
+            var client = CreateClient(new MockedResponseHandler().Epic());
 
             var foo = await client.Epics.Create(new Models.EpicCreate
             {
@@ -64,7 +64,7 @@ namespace ClubHouse.Test
         [Fact]
         public async Task DeleteEpic()
         {
-            var client = CreateClient();
+            var client = CreateClient(new MockedResponseHandler().Epic());
             await client.Epics.Delete(500);
         }
     }
