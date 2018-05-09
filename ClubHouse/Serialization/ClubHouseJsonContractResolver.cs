@@ -48,7 +48,7 @@ namespace ClubHouse.Serialization
 
                 if (property.AttributeProvider.GetAttributes(typeof(T), true).Count > 0)
                 {
-                    property.ShouldSerialize = instance => false;
+                    property.ShouldSerialize = _ => false;
                 }
             }
             return property;

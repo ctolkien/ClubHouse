@@ -2,7 +2,6 @@
 using Xunit;
 using static ClubHouse.Test.TestHelpers;
 
-
 namespace ClubHouse.Test
 {
     public class LinkedFileTests
@@ -10,7 +9,7 @@ namespace ClubHouse.Test
         [Fact]
         public async Task List()
         {
-            var client = CreateClient();
+            var client = CreateClient(new MockedResponseHandler().LinkedFiles());
 
             var result = await client.LinkedFiles.List();
 
@@ -21,7 +20,7 @@ namespace ClubHouse.Test
         [Fact]
         public async Task Create()
         {
-            var client = CreateClient();
+            var client = CreateClient(new MockedResponseHandler().LinkedFiles());
 
             var result = await client.LinkedFiles.Create(new Models.LinkedFile
             {

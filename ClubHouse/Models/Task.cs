@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace ClubHouse.Models
 {
+    /// <summary>
+    /// A unit of work associated with a <see cref="Story"/>.
+    /// </summary>
     public class Task : UpdatableClubHouseModel<int>
     {
         /// <summary>

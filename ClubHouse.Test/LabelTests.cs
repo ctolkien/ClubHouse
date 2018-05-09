@@ -1,7 +1,6 @@
 ﻿using Xunit;
 using static ClubHouse.Test.TestHelpers;
 
-
 namespace ClubHouse.Test
 {
     public class LabelTests
@@ -9,18 +8,17 @@ namespace ClubHouse.Test
         [Fact]
         public async System.Threading.Tasks.Task List()
         {
-            var client = CreateClient();
+            var client = CreateClient(new MockedResponseHandler().Labels());
 
             var result = await client.Labels.List();
 
             Assert.Equal(2, result.Count);
-
         }
 
         [Fact]
         public async System.Threading.Tasks.Task Create()
         {
-            var client = CreateClient();
+            var client = CreateClient(new MockedResponseHandler().Labels());
 
             var label = await client.Labels.Create(new Models.Label
             {
@@ -33,7 +31,7 @@ namespace ClubHouse.Test
         [Fact]
         public async System.Threading.Tasks.Task Update()
         {
-            var client = CreateClient();
+            var client = CreateClient(new MockedResponseHandler().Labels());
 
             var label = await client.Labels.Update(new Models.Label
             {

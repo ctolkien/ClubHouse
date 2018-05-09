@@ -9,7 +9,7 @@ namespace ClubHouse.Test
         [Fact]
         public async Task List()
         {
-            var client = CreateClient();
+            var client = CreateClient(new MockedResponseHandler().Workflows());
 
             var results = await client.Workflows.List();
 

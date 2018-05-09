@@ -12,6 +12,9 @@ namespace ClubHouse.Resources
         protected override string ResourceName => "teams";
     }
 
+    /// <summary>
+    /// Access to <see cref="Team"/>'s in the organization.
+    /// </summary>
     public interface ITeamResource :
         IListable<Team, int>,
         IGettable<Team, int>

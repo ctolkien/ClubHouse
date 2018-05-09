@@ -26,14 +26,20 @@ namespace ClubHouse.Models
         /// </summary>
         public bool Blocker { get; set; }
 
-        //TODO Branches
+        /// <summary>
+        /// An array of Git branches attached to the story.
+        /// </summary>
+        public IReadOnlyCollection<Branch> Branches { get; set; } = new Collection<Branch>();
 
         /// <summary>
         /// An array of comments attached to the story.
         /// </summary>
         public ICollection<Comment> Comments { get; set; } = new Collection<Comment>();
 
-        //TODO Commits
+        /// <summary>
+        /// An array of commits attached to the story.
+        /// </summary>
+        public IReadOnlyCollection<Commit> Commits { get; set; } = new Collection<Commit>();
 
         /// <summary>
         /// A true/false boolean indicating if the Story has been completed.

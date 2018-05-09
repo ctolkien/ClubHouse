@@ -27,7 +27,6 @@ namespace ClubHouse
             {
                 throw new ArgumentNullException(nameof(apiToken));
             }
-
         }
 
         /// <summary>

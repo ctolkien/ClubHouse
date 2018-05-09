@@ -111,10 +111,16 @@ namespace ClubHouse.Models
         /// </summary>
         public EpicState State { get; set; }
 
+        /// <summary>
+        /// A group of calculated values for this Epic.
+        /// </summary>
         [JsonProperty(PropertyName = "stats")]
         public EpicStatistics Statistics { get; set; }
     }
 
+    /// <summary>
+    /// Create Epic allows you to create a new Epic in Clubhouse.
+    /// </summary>
     public class EpicCreate : Epic
     {
         /// <summary>
@@ -145,6 +151,9 @@ namespace ClubHouse.Models
         public int? RequestedById { get; set; }
     }
 
+    /// <summary>
+    /// The workflow state that the Epic is in.
+    /// </summary>
     public enum EpicState
     {
         ToDo,
@@ -152,7 +161,9 @@ namespace ClubHouse.Models
         Done
     }
 
-    //TODO - clean this up
+    /// <summary>
+    /// A group of calculated values for an Epic.
+    /// </summary>
     public class EpicStatistics
     {
         /// <summary>
@@ -160,30 +171,51 @@ namespace ClubHouse.Models
         /// </summary>
         public DateTime? LastStoryUpdate { get; set; }
 
-        [JsonProperty(PropertyName = "num_epics")]
-        public int Epics { get; set; }
-
+        /// <summary>
+        /// The total number of points in this <see cref="Epic"/>.
+        /// </summary>
         [JsonProperty(PropertyName = "num_points")]
         public int Points { get; set; }
 
+        /// <summary>
+        /// The total number of completed points in this <see cref="Epic"/>.
+        /// </summary>
         [JsonProperty(PropertyName = "num_points_done")]
         public int PointsDone { get; set; }
 
+        /// <summary>
+        /// The total number of started points in this <see cref="Epic"/>.
+        /// </summary>
         [JsonProperty(PropertyName = "num_points_started")]
         public int PointsStarted { get; set; }
 
+        /// <summary>
+        /// The total number of unstarted points in this <see cref="Epic"/>.
+        /// </summary>
         [JsonProperty(PropertyName = "num_points_unstarted")]
         public int PointsUnstarted { get; set; }
 
+        /// <summary>
+        /// The total number of done Stories in this <see cref="Epic"/>.
+        /// </summary>
         [JsonProperty(PropertyName = "num_stories_done")]
         public int StoriesDone { get; set; }
 
+        /// <summary>
+        /// The total number of started Stories in this <see cref="Epic"/>.
+        /// </summary>
         [JsonProperty(PropertyName = "num_stories_started")]
         public int StoriesStarted { get; set; }
 
+        /// <summary>
+        /// The total number of Stories with no point estimate.
+        /// </summary>
         [JsonProperty(PropertyName = "num_stories_unestimated")]
         public int StoriesUnestimated { get; set; }
 
+        /// <summary>
+        /// The total number of unstarted Stories in this <see cref="Epic"/>.
+        /// </summary>
         [JsonProperty(PropertyName = "num_stories_unstarted")]
         public int StoriesUnstarted { get; set; }
     }

@@ -18,6 +18,10 @@ namespace ClubHouse.Models
         public string EntityType { get; set; }
     }
 
+    /// <summary>
+    /// Represents a Clubhouse.io resource which can be updated via the API
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public abstract class UpdatableClubHouseModel<T> : ClubHouseModel<T>
     {
         /// <summary>

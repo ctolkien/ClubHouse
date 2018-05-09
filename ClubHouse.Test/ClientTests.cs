@@ -13,9 +13,8 @@ namespace ClubHouse.Test
 
         public ClienTests(ITestOutputHelper output)
         {
-            this._output = output;
+            _output = output;
         }
-
 
         [Fact]
         public async Task CreateClientWithFuncApiKeyShouldChangeToken()
@@ -29,7 +28,6 @@ namespace ClubHouse.Test
 
             _output.WriteLine(result1.RequestMessage.RequestUri.ToString());
             _output.WriteLine(result2.RequestMessage.RequestUri.ToString());
-
         }
     }
 }

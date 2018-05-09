@@ -28,11 +28,15 @@ namespace ClubHouse.Resources
             return base.Update<Story, IReadOnlyList<Story>>(stories);
         }
 
-        public Task<IReadOnlyList<Story>> Search(StorySearch search)
+        public Task<IReadOnlyList<SearchResult>> Search(string query, int pageSize, string next = "")
         {
             //Note, that we use create here, as it under the covers is a 'post'
             //this should probably be exposed a bit better from the base class.
-            return Create<IReadOnlyList<Story>>(search, "stories/search");
+            return Create<IReadOnlyList<SearchResult>>(new {
+                query,
+                pageSize,
+                next
+            }, "search/stories");
         }
     }
 
@@ -60,10 +64,12 @@ namespace ClubHouse.Resources
         Task<IReadOnlyList<Story>> Update(IEnumerable<Story> stories);
 
         /// <summary>
-        /// Search Clubhouse Stories for those matching the provided <see cref="StorySearch"/>
+        /// Search Stories lets you search Stories based on desired parameters.
         /// </summary>
-        /// <param name="search">The search requirements</param>
+        /// <param name="query"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="next"></param>
         /// <returns>A list of matching stories</returns>
-        Task<IReadOnlyList<Story>> Search(StorySearch search);
+        Task<IReadOnlyList<SearchResult>> Search(string query, int pageSize, string next = "");
     }
 }

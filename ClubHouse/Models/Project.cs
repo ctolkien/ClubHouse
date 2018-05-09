@@ -62,8 +62,15 @@ namespace ClubHouse.Models
         /// </summary>
         public bool ShowThermometer { get; set; }
 
-        public DateTime StartDate { get; set; }
+        /// <summary>
+        /// The date at which the Project was started.
+        /// </summary>
+        public DateTime StartTime { get; set; }
 
+        /// <summary>
+        /// A group of calculated values for this Project.
+        /// </summary>
+        [JsonProperty(PropertyName = "stats")]
         public ProjectStatistics Statistics { get; set; }
 
         /// <summary>

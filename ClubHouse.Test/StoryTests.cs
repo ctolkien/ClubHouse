@@ -10,7 +10,7 @@ namespace ClubHouse.Test
         [Fact]
         public async System.Threading.Tasks.Task CreateMultipleStories()
         {
-            var client = CreateClient();
+            var client = CreateClient(new MockedResponseHandler().Stories());
 
             var result = await client.Stories.Create(new Story[]
             {
@@ -22,18 +22,6 @@ namespace ClubHouse.Test
             Assert.Equal(2, result.Count);
         }
 
-        [Fact]
-        public async System.Threading.Tasks.Task StorySearch()
-        {
-            var client = CreateClient();
-            var search = new StorySearch
-            {
-                LabelName = "This is my test label #2"
-            };
 
-            var result = await client.Stories.Search(search);
-
-            Assert.Equal(2, result.Count);
-        }
     }
 }

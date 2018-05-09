@@ -63,6 +63,9 @@ namespace ClubHouse.Models
         /// </summary>
         public string UploaderId { get; set; }
 
+        /// <summary>
+        /// The URL for the file.
+        /// </summary>
         public string Url { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace ClubHouse.Test
         [Fact]
         public async Task List()
         {
-            var client = CreateClient();
+            var client = CreateClient(new MockedResponseHandler().Projects());
 
             var result = await client.Projects.List();
 
@@ -19,7 +19,7 @@ namespace ClubHouse.Test
         [Fact]
         public async Task GetProject()
         {
-            var client = CreateClient();
+            var client = CreateClient(new MockedResponseHandler().Projects());
 
             var result = await client.Projects.Get(6);
 
@@ -29,7 +29,7 @@ namespace ClubHouse.Test
         [Fact]
         public async Task UpdateProject()
         {
-            var client = CreateClient();
+            var client = CreateClient(new MockedResponseHandler().Projects());
 
             var result = await client.Projects.Update(new Models.Project
             {

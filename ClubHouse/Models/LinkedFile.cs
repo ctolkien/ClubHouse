@@ -7,6 +7,9 @@
     /// </summary>
     public class LinkedFile : File
     {
+        /// <summary>
+        /// The integration type (e.g. google, dropbox, box).
+        /// </summary>
         public LinkedFileType Type { get; set; }
     }
 

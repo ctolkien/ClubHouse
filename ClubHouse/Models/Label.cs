@@ -29,6 +29,9 @@ namespace ClubHouse.Models
         /// </summary>
         public string Name { get; set; }
 
+        /// <summary>
+        /// A group of calculated values for a Label.
+        /// </summary>
         [JsonProperty(PropertyName = "stats")]
         public LabelStatistics Statistics { get; set; }
     }

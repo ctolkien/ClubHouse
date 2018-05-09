@@ -10,10 +10,15 @@
     <Company>Soda Digital</Company>
     <Description>.NET Standard wrapper for the Clubhouse API</Description>
     <Copyright>Copyright Chad Tolkien</Copyright>
+    <NoWarn>$(NoWarn);RCS1090</NoWarn>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageLicenseUrl>https://raw.githubusercontent.com/ctolkien/ClubHouse/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/ctolkien/ClubHouse</PackageProjectUrl>
     <PackageTags>clubhouse, project management, api</PackageTags>
-    <PackageReleaseNotes>Version 2 - Lots of bugs fixed, minor API changes</PackageReleaseNotes>
+    <PackageReleaseNotes>
+      * Version 3 - Aligns with Clubhouse.io API version 2
+      * Version 2 - Lots of bugs fixed, minor API changes
+    </PackageReleaseNotes>
     <PackageIconUrl>https://github.com/ctolkien/ClubHouse/raw/master/nuget-icon.png</PackageIconUrl>
   </PropertyGroup>
 

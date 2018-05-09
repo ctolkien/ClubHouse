@@ -39,7 +39,6 @@ namespace ClubHouse.Test
             else
             {
                 throw new Exceptions.NotFoundException($"Request Uri not found in collection. {request.Method} {request.RequestUri}");
-                //return new HttpResponseMessage(HttpStatusCode.NotFound) { RequestMessage = request };
             }
         }
     }
@@ -93,7 +92,6 @@ namespace ClubHouse.Test
             });
 
             handler.AddFakePutResponse(new Uri($"{EndPoint}epics/500"), responseMessage);
-
 
             return handler;
         }
@@ -155,6 +153,76 @@ namespace ClubHouse.Test
                     Name = "Test Category 2",
                     Color = "#ff0000"
                 }, new DefaultSerializerSettings()))
+            });
+
+            return handler;
+        }
+
+        public static MockedResponseHandler Files(this MockedResponseHandler handler)
+        {
+            var content = @"[
+  {
+    'content_type': 'foo',
+    'created_at': '2016-12-31T12:30:00Z',
+    'description': 'foo',
+    'entity_type': 'foo',
+    'external_id': 'foo',
+    'filename': 'foo',
+    'id': 123,
+    'mention_ids': ['12345678-9012-3456-7890-123456789012'],
+    'name': 'foo',
+    'size': 123,
+    'story_ids': [123],
+    'thumbnail_url': 'foo',
+    'updated_at': '2016-12-31T12:30:00Z',
+    'uploader_id': '12345678-9012-3456-7890-123456789012',
+    'url': 'foo'
+  }
+]";
+            handler.AddFakeGetResponse(new Uri($"{EndPoint}files"), new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = new StringContent(content)
+            });
+
+            handler.AddFakePutResponse(new Uri($"{EndPoint}files/123"), new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = new StringContent(content.TrimStart('[').TrimEnd(']'))
+            });
+
+            return handler;
+        }
+
+        public static MockedResponseHandler Labels(this MockedResponseHandler handler)
+        {
+            return handler;
+        }
+
+        public static MockedResponseHandler LinkedFiles(this MockedResponseHandler handler)
+        {
+            return handler;
+        }
+
+        public static MockedResponseHandler Projects(this MockedResponseHandler handler)
+        {
+            return handler;
+        }
+
+        public static MockedResponseHandler Stories(this MockedResponseHandler handler)
+        {
+            return handler;
+        }
+
+        public static MockedResponseHandler Workflows(this MockedResponseHandler handler)
+        {
+            handler.AddFakeGetResponse(new Uri($"{EndPoint}workflows"), new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(new Workflow[]
+                {
+                    new Workflow()
+                }))
             });
 
             return handler;

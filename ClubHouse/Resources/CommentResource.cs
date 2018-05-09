@@ -3,7 +3,6 @@ using ClubHouse.Models;
 
 namespace ClubHouse.Resources
 {
-
     internal class CommentResource : Resource<Comment, int>, ICommentResource
     {
         private readonly int _parentItemId;

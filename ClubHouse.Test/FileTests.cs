@@ -8,7 +8,7 @@ namespace ClubHouse.Test
         [Fact]
         public async System.Threading.Tasks.Task List()
         {
-            var client = CreateClient();
+            var client = CreateClient(new MockedResponseHandler().Files());
             var list = await client.Files.List();
 
             Assert.Equal(1, list.Count);
@@ -17,13 +17,15 @@ namespace ClubHouse.Test
         [Fact]
         public async System.Threading.Tasks.Task Update()
         {
-            var client = CreateClient();
+            var client = CreateClient(new MockedResponseHandler().Files());
 
-            await client.Files.Update(new Models.File
+            var result = await client.Files.Update(new Models.File
             {
-                Id = 43,
+                Id = 123,
                 Description = "Here is the new description"
             });
+
+            Assert.Equal("Here is the new description", result.Description);
         }
     }
 }

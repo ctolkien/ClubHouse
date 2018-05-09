@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using System.Text.RegularExpressions;
-
+using Humanizer;
 namespace ClubHouse
 {
     internal static class Extensions
