@@ -23,7 +23,7 @@ namespace ClubHouse.Serialization
 
             if (property.DeclaringType.IsSubclassOfRawGeneric(typeof(ClubHouseModel<>)))
             {
-                // this bit of funky reflection basically checks if the type is ICollect<> and if so
+                // this bit of funky reflection basically checks if the type is ICollection<> and if so
                 // if checks to see if it has any items. If it's empty, then it is not serialised
                 var typeInfo = property.PropertyType.GetTypeInfo();
 

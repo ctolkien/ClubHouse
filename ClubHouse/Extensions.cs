@@ -20,10 +20,12 @@ namespace ClubHouse
             return false;
         }
 
+        internal static readonly Regex _uppercaseCharFollowedByLowercase = new Regex("([A-Z](?=[a-z]))", RegexOptions.Compiled);
+
         internal static string SeparateCamelCase(this string value)
         {
-            //todo: there is a bug here which inputs a space character at the beginning
-            return Regex.Replace(value, "((?<=[a-z])[A-Z]|[A-Z](?=[a-z]))", " $1");
+            //This inputs a space character at the beginning, hence the trim
+            return _uppercaseCharFollowedByLowercase.Replace(value, " $1").Trim();
         }
     }
 }

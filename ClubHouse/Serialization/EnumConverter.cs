@@ -9,17 +9,14 @@ namespace ClubHouse.Serialization
     {
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            //Todo: make this more resiliant
             return reader.Value.ToString().DehumanizeTo(objectType);
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            //Todo: make this more resiliant
             object alteredValue = value.ToString()
                 .SeparateCamelCase()
-                .ToLower()
-                .Trim();
+                .ToLower();
 
             serializer.Serialize(writer, alteredValue);
         }
