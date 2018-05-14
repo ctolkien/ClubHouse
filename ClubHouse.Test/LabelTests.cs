@@ -25,7 +25,7 @@ namespace ClubHouse.Test
                 Name = "This is my test label #2"
             });
 
-            Assert.Equal(0, label.Statistics.StoriesCompleted);
+            Assert.Equal("This is my test label #2", label.Name);
         }
 
         [Fact]

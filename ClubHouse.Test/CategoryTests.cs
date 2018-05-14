@@ -27,7 +27,7 @@ namespace ClubHouse.Test
                 Name = "Test Category"
             });
 
-            Assert.NotEqual(0, response.Id);
+            Assert.Equal("Test Category", response.Name);
         }
 
         [Fact]

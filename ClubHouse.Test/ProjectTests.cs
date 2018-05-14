@@ -21,9 +21,9 @@ namespace ClubHouse.Test
         {
             var client = CreateClient(new MockedResponseHandler().Projects());
 
-            var result = await client.Projects.Get(6);
+            var result = await client.Projects.Get(123);
 
-            Assert.Equal("sample project", result.Name);
+            Assert.Equal("foo", result.Name);
         }
 
         [Fact]

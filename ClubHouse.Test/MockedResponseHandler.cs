@@ -28,13 +28,36 @@ namespace ClubHouse.Test
             {
                 return _fakeGetResponses[request.RequestUri];
             }
-            if (request.Method == HttpMethod.Post && _fakePostResponses.ContainsKey(request.RequestUri))
+            if (request.Method == HttpMethod.Post)
             {
-                return _fakePostResponses[request.RequestUri];
+                var requestContent = await request.Content.ReadAsStringAsync();
+                var msg = new HttpResponseMessage
+                {
+                    StatusCode = HttpStatusCode.Created,
+                    Content = new StringContent(requestContent)
+                };
+
+                if (_fakeGetResponses.TryGetValue(request.RequestUri, out var httpResponseMessage))
+                {
+
+                }
+                else
+                {
+                    _fakeGetResponses.Add(request.RequestUri, msg);
+                }
+
+                return msg;
             }
             if (request.Method == HttpMethod.Put && _fakePutResponses.ContainsKey(request.RequestUri))
             {
                 return _fakePutResponses[request.RequestUri];
+            }
+            if (request.Method == HttpMethod.Delete)
+            {
+                return new HttpResponseMessage
+                {
+                    StatusCode = HttpStatusCode.NoContent
+                };
             }
             else
             {
@@ -206,6 +229,43 @@ namespace ClubHouse.Test
 
         public static MockedResponseHandler Projects(this MockedResponseHandler handler)
         {
+            var arrayContent = @"[
+  {
+    'abbreviation': 'foo',
+    'archived': true,
+    'color': 'foo',
+    'created_at': '2016-12-31T12:30:00Z',
+    'days_to_thermometer': 123,
+    'description': 'foo',
+    'entity_type': 'foo',
+    'external_id': 'foo',
+    'follower_ids': ['12345678-9012-3456-7890-123456789012'],
+    'id': 123,
+    'iteration_length': 123,
+    'name': 'foo',
+    'show_thermometer': true,
+    'start_time': '2016-12-31T12:30:00Z',
+    'stats': {
+      'num_points': 123,
+      'num_stories': 123
+    },
+    'team_id': 123,
+    'updated_at': '2016-12-31T12:30:00Z'
+  }
+]";
+
+            handler.AddFakeGetResponse(new Uri($"{EndPoint}projects"), new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = new StringContent(arrayContent)
+            });
+
+            handler.AddFakeGetResponse(new Uri($"{EndPoint}projects/123"), new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = new StringContent(arrayContent.TrimStart('[').TrimEnd(']'))
+            });
+
             return handler;
         }
 
