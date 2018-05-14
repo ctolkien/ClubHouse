@@ -21,7 +21,5 @@ namespace ClubHouse.Test
 
             Assert.Equal(2, result.Count);
         }
-
-
     }
 }

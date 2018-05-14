@@ -14,8 +14,9 @@ namespace ClubHouse.Models
         public bool Archived { get; set; }
 
         /// <summary>
-        /// The hex color to be displayed with the Category (for example, “#ff0000”).
+        /// The hex color to be displayed with the Category.
         /// </summary>
+        /// <example>#ff0000</example>
         public string Color { get; set; }
 
         /// <summary>
