@@ -25,17 +25,14 @@ namespace ClubHouse.Resources
         public virtual async Task<IReadOnlyList<TModel>> List()
         {
             var result = await _client.GetAsync(ResourceUrl()).ConfigureAwait(false);
-            var content = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
-
-            return JsonConvert.DeserializeObject<IReadOnlyList<TModel>>(content, SerializationSettings.Default);
+            return await result.Content.ReadJsonBodyAs<IReadOnlyList<TModel>>(SerializationSettings.Default);
         }
 
         public virtual async Task<TModel> Get(TKey id)
         {
             var result = await _client.GetAsync(ResourceUrl(id)).ConfigureAwait(false);
-            var content = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-            return JsonConvert.DeserializeObject<TModel>(content, SerializationSettings.Default);
+            return await result.Content.ReadJsonBodyAs<TModel>(SerializationSettings.Default);
         }
 
         public virtual Task<TModel> Create(TModel model) => Create<TModel>(model);
@@ -57,7 +54,8 @@ namespace ClubHouse.Resources
             var serialized = JsonConvert.SerializeObject(model, SerializationSettings.Create);
             var httpContent = new StringContent(serialized);
             var result = await _client.PostAsync(resourceUrl, httpContent).ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<TOutput>(await result.Content.ReadAsStringAsync().ConfigureAwait(false), SerializationSettings.Default);
+
+            return await result.Content.ReadJsonBodyAs<TOutput>(SerializationSettings.Create);
         }
 
         public virtual Task<TModel> Update(TModel model) => Update<TModel>(model);
@@ -79,7 +77,7 @@ namespace ClubHouse.Resources
 
             var result = await _client.PutAsync(resourceUrl, httpContent).ConfigureAwait(false);
 
-            return JsonConvert.DeserializeObject<TOutput>(await result.Content.ReadAsStringAsync().ConfigureAwait(false), SerializationSettings.Default);
+            return await result.Content.ReadJsonBodyAs<TOutput>(SerializationSettings.Update);
         }
 
         public virtual async System.Threading.Tasks.Task Delete(TKey id)
@@ -90,6 +88,14 @@ namespace ClubHouse.Resources
             {
                 //throw exception
             }
+        }
+    }
+
+    internal static class Extensions
+    {
+        internal static async Task<T> ReadJsonBodyAs<T>(this HttpContent content, JsonSerializerSettings serializerSettings)
+        {
+            return JsonConvert.DeserializeObject<T>(await content.ReadAsStringAsync().ConfigureAwait(false), serializerSettings);
         }
     }
 }
