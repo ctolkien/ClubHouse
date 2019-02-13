@@ -29,7 +29,7 @@ namespace ClubHouse
             }
             else
             {
-                builder.Query = $"?token={token}";
+                builder.Query = $"token={token}";
             }
 
             request.RequestUri = builder.Uri;
