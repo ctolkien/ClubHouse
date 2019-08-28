@@ -22,7 +22,3 @@ jobs:
       with:
         name: build
         path: $GUBHUB_WORKSPACE/output
-    - name: Packages Release
-      uses: actions/github-packages@master
-    
-    
