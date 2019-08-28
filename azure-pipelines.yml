@@ -12,8 +12,26 @@ pool:
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: 'ClubHouse.sln'
+    arguments: '-c $(BuildConfiguration)'
+- task: DotNetCoreCLI@2
+  enabled: false
+  inputs:
+    command: 'test'
+    projects: 'ClubHouse.Test/ClubHouse.Test.csproj'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'pack'
+    packagesToPack: 'ClubHouse/*.csproj'
+    nobuild: true
+    includesymbols: true
+    versioningScheme: 'byBuildNumber'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- task: PublishPipelineArtifact@1
+  displayName: "Publish Artifact"
+  inputs:
+    targetPath: "$(build.artifactstagingdirectory)"
+    ArtifactName: "build"
