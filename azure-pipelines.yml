@@ -16,7 +16,7 @@ steps:
   inputs:
     command: 'build'
     projects: 'ClubHouse.sln'
-    arguments: '-c $(BuildConfiguration)'
+    arguments: '-c Release'
 - task: DotNetCoreCLI@2
   enabled: false
   inputs:
