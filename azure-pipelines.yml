@@ -9,26 +9,26 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
 - task: DotNetCoreCLI@2
+  displayName: 'Build'
   inputs:
     command: 'build'
     projects: 'ClubHouse.sln'
     arguments: '-c Release'
 - task: DotNetCoreCLI@2
+  displayName: 'Test'
   enabled: false
   inputs:
     command: 'test'
     projects: 'ClubHouse.Test/ClubHouse.Test.csproj'
 - task: DotNetCoreCLI@2
+  displayName: 'Pack'
   inputs:
     command: 'pack'
     packagesToPack: 'ClubHouse/*.csproj'
     nobuild: true
     includesymbols: true
-    versioningScheme: 'byBuildNumber'
+    #versioningScheme: 'byBuildNumber'
 
 - task: PublishPipelineArtifact@1
   displayName: "Publish Artifact"
